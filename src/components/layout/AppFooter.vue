@@ -1,0 +1,23 @@
+<script setup lang="ts">
+import { profile } from '@/data/profile'
+</script>
+
+<template>
+  <footer id="contact" class="site-footer">
+    <div class="footer-grid">
+      <p class="footer-kicker">02 / CONTACT</p>
+      <div class="footer-callout">
+        <p class="footer-title">LET’S START A<br />CONVERSATION.</p>
+        <a class="footer-email" :href="`mailto:${profile.email}`">
+          {{ profile.email }}
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+      <div class="footer-meta">
+        <span>© 2026 {{ profile.name }}</span>
+        <a :href="profile.githubUrl" target="_blank" rel="noreferrer">GitHub ↗</a>
+        <span>Built with Vue</span>
+      </div>
+    </div>
+  </footer>
+</template>

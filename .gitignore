@@ -1,1 +1,5 @@
 /iSpan_AI_SinglePage/
+node_modules/
+dist/
+*.local
+.DS_Store
