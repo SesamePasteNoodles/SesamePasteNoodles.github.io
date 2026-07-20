@@ -6,6 +6,7 @@
 
 - `.agents/planning.md`：產品、內容、資訊架構與 UX 的主要規格。
 - `.agents/IMPLEMENTATION-PLAN.md`：施工階段、驗收條件與 Definition of Done。
+- `.agents/CONTENT.md`：允許公開的個人資訊白名單與專案連結狀態。
 - `.agents/DESIGN-vercel.md`：僅供視覺參考，不得覆蓋 `planning.md` 的專案決策。
 - `iSpan_AI_SinglePage/`：舊版原型與視覺參考；除非使用者明確要求，不要直接覆寫或把它當成正式新版。
 - `README.md`：面向訪客與招募者的專案入口，不承載完整內部規格。
@@ -23,6 +24,8 @@
 
 ## 內容規則
 
+- 公開個人資訊採白名單原則；只有 `.agents/CONTENT.md` 明確核准的欄位可以直接顯示。
+- 未列出的個人資料一律省略，不要從其他資料推測或為了版面完整而要求補齊。
 - 不得虛構姓名、職稱、聯絡方式、Repository、Demo、專案角色、團隊規模、技術棧或成效數據。
 - 未確認的內容使用清楚的 placeholder 或省略，不要用看似正式的假資料補齊版面。
 - HAPPET Case Study 必須區分團隊成果與個人貢獻。

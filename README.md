@@ -1,14 +1,17 @@
 # Randy Chen — Developer Portfolio
 
-Backend-focused full-stack developer portfolio showcasing real project
-experience, technical decisions, and case studies.
+Personal developer portfolio for presenting selected projects, technical
+decisions, and case studies.
+
+[GitHub](https://github.com/SesamePasteNoodles) ·
+[Email](mailto:randy861028@gmail.com)
 
 ---
 
 ## About This Project
 
-This portfolio presents my backend and full-stack development work through
-concise project summaries and detailed case studies.
+This portfolio presents selected development work through concise project
+summaries and detailed case studies.
 
 ## License
 

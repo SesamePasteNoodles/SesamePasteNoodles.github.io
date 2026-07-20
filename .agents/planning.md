@@ -10,7 +10,8 @@
 - 保留原版最有辨識度的元素：芥末黃、黑白區塊交錯、大寫標題、細實線／虛線、黑白人物影像。
 - 首頁以快速理解與專案導流為主，技術深度移至 Project Detail／Case Study。
 - 桌面版採頂部導覽搭配窄版黃色側軌，不再使用占畫面 20% 的大型固定側欄。
-- Hero 使用技術資訊卡，不使用圖庫人物照；真實個人照移至 About。
+- Hero 使用技術資訊卡，不使用圖庫人物照；About 只有在個人照獲准公開後才使用，
+  否則採純文字或非人物品牌圖形。
 - Tech Stack 至少保留一個完整黑底區塊，作為全頁主要視覺節點。
 - 動畫只提示狀態與操作，並支援鍵盤操作與減少動態偏好。
 - 所有專案、技術與成效敘述必須能由實際成果佐證，不使用尚未完成的能力宣稱。
@@ -43,7 +44,7 @@
 - 黑色與淺灰區塊交錯
 - 窄版黃色側軌
 - 大寫章節標題與細虛線
-- About 區塊的真實黑白人物照
+- About 區塊經核准的黑白人物照，或非人物品牌圖形
 
 整體風格定位：
 
@@ -168,17 +169,16 @@ box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
 ```text
 ┌────────────────────────────────────────────────────────────┐
 │ RC.       About   Skills   Projects   Experience   Contact │
-│                                      GitHub   [Resume]      │
+│                                      GitHub   [Email]       │
 ├────────────────────────────────────────────────────────────┤
 │                                                            │
-│  AVAILABLE FOR OPPORTUNITIES                                │
+│  SELECTED WORK                                              │
 │  ─────────────────────────                                 │
 │                                                            │
 │  Randy Chen                                                │
-│  Full-Stack Developer                                      │
+│  [APPROVED PROFESSIONAL TITLE]                              │
 │                                                            │
-│  使用 ASP.NET Core 與 Vue 3，                              │
-│  開發安全、可靠且可維護的 Web 系統。                        │
+│  [APPROVED PROFESSIONAL SUMMARY]                            │
 │                                                            │
 │  [查看精選作品]  [GitHub]                                  │
 │                                                            │
@@ -219,15 +219,15 @@ box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
 │  ┌──────────────────────────────────────────────────────┐ │
 │  │ HAPPET / PETCARE                              01     │ │
 │  │                                                      │ │
-│  │ 會員驗證、錢包與第三方金流平台                       │ │
+│  │ [APPROVED PROJECT SUMMARY]                           │ │
 │  │                                                      │ │
 │  │ ┌──────────────────────────────┐  ROLE               │ │
-│  │ │                              │  Backend Developer  │ │
+│  │ │                              │  [APPROVED ROLE]    │ │
 │  │ │       專案大型截圖            │                     │ │
 │  │ │                              │  STACK              │ │
-│  │ └──────────────────────────────┘  ASP.NET / Redis    │ │
+│  │ └──────────────────────────────┘  [APPROVED STACK]   │ │
 │  │                                                      │ │
-│  │ JWT · 2FA · Wallet · Webhook       [View Case Study]│ │
+│  │ [APPROVED HIGHLIGHTS]                [View Project] │ │
 │  └──────────────────────────────────────────────────────┘ │
 │                                                            │
 │  ┌──────────────────────────┬───────────────────────────┐ │
@@ -239,18 +239,14 @@ box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
 ├────────────────────────────────────────────────────────────┤
 │  04 / EXPERIENCE                                           │
 │                                                            │
-│  2026 ─●─ 資展國際全端工程師養成班                         │
-│          │                                                 │
-│          ●─ HAPPET 團隊專案                                │
-│          │                                                 │
-│          ●─ Full-Stack Developer 求職                      │
+│  [ONLY RENDER APPROVED EXPERIENCE CONTENT]                  │
 ├────────────────────────────────────────────────────────────┤
 │                                                            │
 │  LET'S BUILD SOMETHING RELIABLE.                           │
 │                                                            │
 │  歡迎聯絡我討論職缺或合作機會。                             │
 │                                                            │
-│  [Email Me]     GitHub     Download Resume                 │
+│  [Email Me]     GitHub                                     │
 │                                                            │
 ├────────────────────────────────────────────────────────────┤
 │  © 2026 Randy Chen                          BUILT WITH VUE  │
@@ -293,7 +289,7 @@ Contact
 
 ```text
 GitHub
-Resume
+Email
 ```
 
 #### 行為
@@ -315,20 +311,17 @@ Resume
 讓面試官第一眼理解：
 
 - 姓名
-- 職位
-- 核心技術定位
+- 經核准的專業定位
 - 查看作品入口
 
 #### 文案結構
 
 ```text
-AVAILABLE FOR OPPORTUNITIES
+SELECTED WORK
 
 Randy Chen
-Full-Stack Developer
-
-使用 ASP.NET Core 與 Vue 3，
-開發安全、可靠且可維護的 Web 系統。
+[APPROVED PROFESSIONAL TITLE]
+[APPROVED PROFESSIONAL SUMMARY]
 ```
 
 CTA：
@@ -381,7 +374,8 @@ Mobile：自動高度，最少 720px
 
 #### 右欄
 
-使用真實黑白人物照與資訊卡的組合，不使用圖庫人物照或無關裝飾插圖。
+個人照獲准公開時，使用真實黑白人物照與資訊卡的組合；未獲准時改用純文字或
+非人物品牌圖形，不使用圖庫人物照或無關裝飾插圖。
 
 ```text
 CURRENT FOCUS
@@ -485,20 +479,13 @@ RESTful API、身分驗證與交易流程實作。
 
 ### 4.6 Experience
 
-不使用完整履歷卡片。
-
-改用簡短 Timeline：
+不使用完整履歷卡片。只有 `.agents/CONTENT.md` 核准的經歷才能出現在此區；
+沒有核准內容時，首頁省略 Experience。
 
 ```text
-2026
-資展國際全端工程師養成班
-
-2026
-HAPPET 團隊專案
-負責會員、驗證、錢包與金流模組
-
-NOW
-尋找初階後端或全端工程師職位
+[APPROVED DATE]
+[APPROVED EXPERIENCE TITLE]
+[APPROVED SUMMARY]
 ```
 
 每個節點使用黃色圓點。
@@ -516,10 +503,9 @@ LET'S BUILD SOMETHING RELIABLE.
 
 [Email Me]
 [GitHub]
-[Download Resume]
 ```
 
-避免使用表單，降低維護成本。
+避免使用表單，降低維護成本。履歷只有在 `.agents/CONTENT.md` 明確核准後才加入。
 
 ---
 
@@ -531,12 +517,12 @@ LET'S BUILD SOMETHING RELIABLE.
 ├────────────────────────────────────────────────────────────┤
 │  HAPPET / PETCARE                                          │
 │                                                            │
-│  會員、驗證、錢包與金流系統                                │
+│  [APPROVED PROJECT SUMMARY]                                 │
 │                                                            │
 │  ROLE              TEAM             YEAR                    │
-│  Backend Developer 5 Members        2026                    │
+│  [TO CONFIRM]      [TO CONFIRM]     [TO CONFIRM]            │
 │                                                            │
-│  ASP.NET CORE · VUE 3 · SQL SERVER · REDIS                 │
+│  [APPROVED TECH STACK]                                      │
 ├────────────────────────────────────────────────────────────┤
 │                                                            │
 │                 大型專案 Hero 截圖                          │
@@ -772,7 +758,7 @@ src/
 
 ### Phase 0：內容與技術基線
 
-- 確認聯絡資訊、履歷、真實圖片、專案角色與公開範圍
+- 依 `.agents/CONTENT.md` 確認公開資訊，並確認專案角色與公開範圍
 - 確認新專案目錄與技術基線
 - 移除假連結、圖庫人物照與無法佐證的敘述
 
@@ -861,7 +847,7 @@ src/
 - 專案大圖
 - 窄版黃色側軌
 - 大寫標題與細虛線
-- About 的真實黑白人物照
+- About 經核准的黑白人物照，或非人物品牌圖形
 
 最後形成：
 

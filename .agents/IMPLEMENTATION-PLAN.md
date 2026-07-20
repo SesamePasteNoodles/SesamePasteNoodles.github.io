@@ -8,10 +8,10 @@
 
 建立一個部署於 GitHub Pages 的個人作品集，讓招募者能在短時間內理解：
 
-- Randy 的全端／後端工程師定位。
+- 經使用者核准的專業定位。
 - 可實際驗證的技術棧與專案成果。
 - HAPPET 中的角色、技術決策與解題能力。
-- GitHub、履歷與聯絡方式。
+- GitHub 與經使用者核准公開的聯絡方式。
 
 網站必須兼具 Vercel 式閱讀效率與原 SinglePage 的黑白黃個人識別，但不仿製
 Vercel 官網。
@@ -56,9 +56,9 @@ Vercel 官網。
 
 開始正式版面實作前，需取得或確認：
 
-- 正確姓名、英文姓名與職稱。
-- Email、GitHub URL、履歷檔案與是否公開電話。
-- 真實黑白個人照；若暫時沒有，About 保留純文字版，不使用圖庫人物照。
+- 以 [`CONTENT.md`](./CONTENT.md) 作為公開個人資訊白名單；未列出的欄位預設省略。
+- 職稱、專業摘要、履歷、電話、照片及其他個人資訊只有在使用者明確核准後才加入。
+- 若沒有經核准的個人照，About 使用純文字或非人物品牌圖形，不使用圖庫人物照。
 - 三個專案的正式名稱、狀態、角色、時間、團隊人數與技術棧。
 - 每個公開 Repository、Demo 或無法公開的原因。
 - HAPPET 實際負責範圍及可公開的驗證、2FA、Wallet、Payment 細節。
@@ -143,16 +143,16 @@ Project Detail
 
 工作：
 
-- Hero：姓名、定位、主文案、CTA 與技術資訊卡。
-- About：真實黑白照片、簡介與 Current Focus。
+- Hero：姓名，以及經核准的定位、主文案、CTA 與技術資訊卡。
+- About：經核准的簡介；個人照未核准時採純文字或非人物品牌圖形。
 - Tech Stack：黑底 Bento Grid。
 - Featured Projects：HAPPET 主卡與兩張副卡。
 - Experience：精簡 Timeline。
-- Contact：Email、GitHub 與履歷下載。
+- Contact：依 `CONTENT.md` 顯示 Email 與 GitHub；履歷只有在核准後才加入。
 
 驗收：
 
-- 首屏可辨識姓名、職位、主要技術與作品入口。
+- 首屏可辨識姓名、經核准的專業定位與作品入口。
 - 所有 CTA 連到有效目標。
 - 專案卡只呈現摘要，不把 Case Study 全文塞入首頁。
 - 圖片有尺寸、替代文字與合理裁切。
@@ -218,7 +218,7 @@ Project Detail
 | Mobile | 390×844、360×800 |
 | 鍵盤 | Tab 順序、Skip Link、Menu、Modal、CTA |
 | 動態偏好 | Reduced Motion |
-| 內容 | 專案角色、連結、履歷、聯絡資訊 |
+| 內容 | 專案角色、連結與 `CONTENT.md` 核准的公開資訊 |
 | 部署 | 首頁、詳情 Hash Route、重新整理、404 |
 
 實作建立 `package.json` 後，至少提供以下等價指令：
