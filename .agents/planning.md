@@ -445,8 +445,12 @@ RESTful API、身分驗證與交易流程實作。
 首頁固定展示三個：
 
 1. HAPPET
-2. Portfolio
-3. WinForms Ticket System
+2. WinForms 個人小專案（正式名稱待確認）
+3. Codex／Anti-gravity 預設同步工具（正式名稱待確認）
+
+首頁只負責精選與導流，不隨專案總數增加而持續堆疊。三個名額由內容資料的
+`featured` 與 `featuredOrder` 明確控制，不自動等同最新三個專案。第四個之後的
+專案收納於完整 Projects 頁；首頁提供「查看全部專案」入口。
 
 #### HAPPET
 
@@ -481,6 +485,13 @@ RESTful API、身分驗證與交易流程實作。
 - 邊框轉為品牌黃
 - 箭頭向右移動
 - 背景由白色變成 `#fafafa`
+
+#### 未來專案收納
+
+- `/#/projects` 顯示所有可公開專案，初期不因只有三個專案而加入多餘篩選器。
+- `/#/projects/:slug` 顯示個別 Project Detail／Case Study。
+- 專案數量超過約 9～12 個時，再依實際內容評估分類、篩選或分頁。
+- 新增專案預設只進入完整 Projects 頁；是否進入首頁由人工策展決定。
 
 ---
 
@@ -745,8 +756,13 @@ src/
 │   ├── ProjectDetailView.vue
 │   └── NotFoundView.vue
 │
+├── content/
+│   └── projects/
+│       ├── happet.json
+│       ├── winforms-project.json
+│       └── codex-settings-sync.json
+│
 ├── data/
-│   ├── projects.ts
 │   ├── skills.ts
 │   └── experience.ts
 │
@@ -767,6 +783,49 @@ src/
 - 頁面專屬的區塊放在對應功能目錄；跨頁面的基礎 UI 放在 `shared/`；全站骨架放在 `layout/`。
 - 重複內容與業務資料由 `data/` 模組提供，不得在多個 View 或 Component 重複硬編碼。
 - 拆分以職責、可讀性與重用價值為依據；單次、簡單且無獨立行為的標記不必為了元件數量過度拆分。
+
+### 9.2 專案內容模型與 CMS 擴充
+
+專案內容從第一版起採 CMS-ready 的資料結構，不將 Project Detail 正文或圖片清單
+硬編碼在 Vue 元件。建議每個專案使用獨立 JSON 內容檔，圖片集中在對應目錄：
+
+```text
+src/content/projects/
+├── happet.json
+├── winforms-project.json
+└── codex-settings-sync.json
+
+public/images/projects/
+├── happet/
+├── winforms-project/
+└── codex-settings-sync/
+```
+
+內容檔至少包含：
+
+- `slug`、名稱、摘要、狀態、分類、角色、團隊人數與技術標籤。
+- `featured`、`featuredOrder`、封面圖與有效的 Repository／Demo 狀態。
+- 可排序的 `sections` 區塊；每個區塊以 `type` 決定 Vue 呈現元件。
+- 每張內容圖片的路徑、替代文字、圖說及必要的版型設定。
+
+第一版支援的內容區塊以受控版型為主：
+
+```text
+richText
+imageWithCaption
+textWithImage
+imageGallery
+technicalHighlight
+```
+
+`textWithImage` 可選圖片在左或右；`imageGallery` 可包含多張圖片，且每張圖片都有
+獨立的 `alt` 與 `caption`。後台所稱的「自由編排」是調整區塊順序並選擇上述版型，
+不提供任意像素拖拉，以維持 RWD、鍵盤操作、圖片語意與視覺一致性。
+
+公開站仍部署於 GitHub Pages。後續 CMS 優先評估 Git-backed 方案，由後台將內容與
+媒體提交回 Repository，再由 GitHub Actions 重新建置；CMS 不取代 Vue、Vite、
+Router 或既有部署流程。登入與 Repository 寫入憑證不得存入前端程式碼或提交至
+版本控制。
 
 預設不引入 Bootstrap。Grid、Container、RWD 與視覺樣式以原生 CSS／CSS Grid
 完成，避免多一層樣式覆寫與不必要的前端負擔。只有在實作階段確認某項元件確實
@@ -791,7 +850,7 @@ src/
 
 - Vue、TypeScript、Vite
 - Router 與 Hash History
-- Projects、Skills、Experience data modules
+- CMS-ready Projects content files、Skills 與 Experience data modules
 - Layout 與共用元件
 
 ### Phase 2：設計系統
@@ -824,8 +883,8 @@ src/
 - Architecture
 - Screenshots
 - Lessons Learned
-- Portfolio
-- WinForms Ticket System
+- WinForms 個人小專案
+- Codex／Anti-gravity 預設同步工具
 
 ### Phase 5：互動與 RWD
 
@@ -844,6 +903,13 @@ src/
 - 圖片壓縮
 - Lighthouse 檢查
 - 404 處理
+
+### Phase 7：內容管理（需求達成時導入）
+
+- 以 Git-backed CMS 管理專案內容與媒體，優先評估 Pages CMS
+- 設定多圖、圖說、替代文字、區塊排序及受控版型欄位
+- 編輯儲存後 Commit 回 Repository，觸發既有 GitHub Actions 部署
+- 驗證登入、最小 Repository 權限、媒體路徑與內容還原流程
 
 各 Phase 的工作項目、依賴、驗收條件與停止條件，以
 [`IMPLEMENTATION-PLAN.md`](./IMPLEMENTATION-PLAN.md) 為準。
