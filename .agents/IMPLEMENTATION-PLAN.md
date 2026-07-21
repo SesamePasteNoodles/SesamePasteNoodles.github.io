@@ -114,12 +114,16 @@ Project Detail
 - 設定 Router、Hash History 與 Not Found 畫面。
 - 建立 `projects.ts`、`skills.ts`、`experience.ts`。
 - 建立 Layout、Section Container、Button、Tag 與 Heading 基礎元件。
+- 使 View 聚焦於路由資料、頁面狀態與區塊組合，將具獨立職責或重用價值的 UI 拆為 Component。
 - 建立 lint、type-check、build 與 preview scripts。
 
 驗收：
 
 - 首頁與三個 Project Detail 路由可直接開啟。
 - 專案資料不重複硬編碼於多個元件。
+- View 不承載可獨立封裝的大型 UI 區塊。
+- 共用元件以 Props、Slots 或 Emits 提供清楚介面，且不直接依賴特定 View 的資料結構。
+- 元件拆分符合 `planning.md` 的職責與重用原則，未因追求檔案數量而過度抽象。
 - Build 與 type check 通過。
 
 ### Phase 2：Design System
