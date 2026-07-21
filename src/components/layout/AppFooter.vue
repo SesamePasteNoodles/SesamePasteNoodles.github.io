@@ -5,9 +5,9 @@ import { profile } from '@/data/profile'
 <template>
   <footer id="contact" class="site-footer">
     <div class="footer-grid">
-      <p class="footer-kicker">02 / CONTACT</p>
+      <p class="footer-kicker">03 / CONTACT</p>
       <div class="footer-callout">
-        <p class="footer-title">LET’S START A<br />CONVERSATION.</p>
+        <p class="footer-title">LET’S START A<br /><span>CONVERSATION.</span></p>
         <a class="footer-email" :href="`mailto:${profile.email}`">
           {{ profile.email }}
           <span aria-hidden="true">↗</span>

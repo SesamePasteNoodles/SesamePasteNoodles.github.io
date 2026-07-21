@@ -1,13 +1,17 @@
 :root {
-  --color-background: #ffffff;
-  --color-background-soft: #fafafa;
-  --color-background-muted: #f0f0ec;
-  --color-text: #171717;
-  --color-text-secondary: #5c5c56;
-  --color-border: #d8d8d2;
-  --color-primary: #f5c518;
-  --color-primary-hover: #e0b300;
-  --color-primary-soft: #fff4b8;
+  --color-background: #081526;
+  --color-background-soft: #10243e;
+  --color-background-muted: #172d48;
+  --color-text: #f2f1ec;
+  --color-text-secondary: #c8d0da;
+  --color-text-muted: #aab6c5;
+  --color-border: #30435a;
+  --color-border-strong: #52647a;
+  --color-ink: #05080d;
+  --color-primary: #d6a928;
+  --color-primary-hover: #e3bb45;
+  --color-primary-soft: #2b2a20;
+  --color-primary-strong: #f0cd69;
   --color-white: #ffffff;
   --font-sans: Geist, Inter, "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif;
   --font-mono: "Geist Mono", "JetBrains Mono", Consolas, monospace;
@@ -17,4 +21,5 @@
   --gutter: clamp(1.25rem, 4vw, 4.5rem);
   --section-space: clamp(5rem, 10vw, 9rem);
   --focus-ring: 3px solid var(--color-primary);
+  --shadow-card: 0 24px 70px rgb(0 0 0 / 0.24);
 }

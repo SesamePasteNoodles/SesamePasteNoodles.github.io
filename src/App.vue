@@ -2,6 +2,7 @@
 import AppFooter from '@/components/layout/AppFooter.vue'
 import AppHeader from '@/components/layout/AppHeader.vue'
 import SectionRail from '@/components/layout/SectionRail.vue'
+import BackToTopButton from '@/components/shared/BackToTopButton.vue'
 </script>
 
 <template>
@@ -11,5 +12,6 @@ import SectionRail from '@/components/layout/SectionRail.vue'
   <main id="main-content">
     <RouterView />
   </main>
+  <BackToTopButton />
   <AppFooter />
 </template>

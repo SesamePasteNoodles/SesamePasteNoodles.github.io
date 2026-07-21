@@ -7,8 +7,8 @@ import { profile } from '@/data/profile'
   <section id="intro" class="hero" aria-labelledby="hero-title">
     <div class="hero-copy">
       <div class="hero-eyebrow">
-        <span>PORTFOLIO</span>
-        <span>2026 / WEB</span>
+        <span>PORTFOLIO / 2026</span>
+        <span>WEB / INTERFACE</span>
       </div>
 
       <h1 id="hero-title">
@@ -22,21 +22,31 @@ import { profile } from '@/data/profile'
       </div>
     </div>
 
-    <div class="hero-art" aria-hidden="true">
-      <div class="art-grid">
-        <span class="art-square art-square--black"></span>
-        <span class="art-square art-square--yellow"></span>
-        <span class="art-circle"></span>
-        <span class="art-line"></span>
-        <span class="art-index">01</span>
-        <span class="art-caption">PUBLIC<br />BY DESIGN</span>
+    <div class="hero-art" aria-label="作品集資訊索引">
+      <div class="signal-panel">
+        <div class="signal-panel__head">
+          <span>PROFILE INDEX</span>
+          <span>RC—01</span>
+        </div>
+        <div class="signal-panel__core" aria-hidden="true">
+          <span class="signal-orbit"></span>
+          <span class="signal-axis signal-axis--horizontal"></span>
+          <span class="signal-axis signal-axis--vertical"></span>
+          <span class="signal-node"></span>
+          <strong>RC</strong>
+        </div>
+        <dl class="signal-panel__list">
+          <div><dt>01</dt><dd>PUBLIC PROFILE</dd></div>
+          <div><dt>02</dt><dd>SELECTED WORK</dd></div>
+          <div><dt>03</dt><dd>VERIFIED LINKS</dd></div>
+        </dl>
       </div>
     </div>
 
     <div class="hero-status">
       <span>SELECTED WORK</span>
       <span class="status-line"></span>
-      <span>CONTENT VERIFIED BEFORE PUBLISHING</span>
+      <span>ONLY VERIFIED CONTENT IS PUBLISHED</span>
     </div>
   </section>
 </template>

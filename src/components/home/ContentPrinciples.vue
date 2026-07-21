@@ -1,7 +1,7 @@
 <template>
-  <section class="principles" aria-labelledby="principles-title">
+  <section id="approach" class="principles" aria-labelledby="principles-title">
     <div class="principles-intro">
-      <p class="mono-label">01 / APPROACH</p>
+      <p class="mono-label">02 / APPROACH</p>
       <h2 id="principles-title">BUILT TO MAKE<br />THE WORK CLEAR.</h2>
     </div>
 
@@ -9,17 +9,17 @@
       <article>
         <span>01</span>
         <h3>VERIFIED</h3>
-        <p>Only reviewed public content is rendered.</p>
+        <p>只呈現已確認可以公開的內容與連結。</p>
       </article>
       <article>
         <span>02</span>
         <h3>FOCUSED</h3>
-        <p>Project depth belongs in dedicated case studies.</p>
+        <p>首頁維持清楚，技術深度留給獨立 Case Study。</p>
       </article>
       <article>
         <span>03</span>
         <h3>ACCESSIBLE</h3>
-        <p>Keyboard, contrast, and reduced motion are first-class.</p>
+        <p>鍵盤、對比與減少動態偏好都是基礎要求。</p>
       </article>
     </div>
   </section>

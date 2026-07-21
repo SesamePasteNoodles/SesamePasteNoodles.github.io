@@ -25,7 +25,8 @@ const router = createRouter({
     }
 
     if (to.hash) {
-      return { el: to.hash, behavior: 'smooth' }
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      return { el: to.hash, behavior: reduceMotion ? 'auto' : 'smooth' }
     }
 
     return { top: 0 }

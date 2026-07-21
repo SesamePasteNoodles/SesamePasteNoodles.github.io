@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
+import { useActiveSection } from '@/composables/useActiveSection'
 import { profile } from '@/data/profile'
 
 const isOpen = ref(false)
+const activeSection = useActiveSection(['intro', 'approach', 'contact'])
 
 function closeMenu() {
   isOpen.value = false
@@ -34,7 +36,30 @@ function closeMenu() {
         :class="{ 'header-nav--open': isOpen }"
         aria-label="主要導覽"
       >
-        <RouterLink to="/#intro" @click="closeMenu">Intro</RouterLink>
+        <RouterLink
+          to="/#intro"
+          active-class=""
+          :class="{ 'section-link--active': activeSection === 'intro' }"
+          @click="closeMenu"
+        >
+          Intro
+        </RouterLink>
+        <RouterLink
+          to="/#approach"
+          active-class=""
+          :class="{ 'section-link--active': activeSection === 'approach' }"
+          @click="closeMenu"
+        >
+          Approach
+        </RouterLink>
+        <RouterLink
+          to="/#contact"
+          active-class=""
+          :class="{ 'section-link--active': activeSection === 'contact' }"
+          @click="closeMenu"
+        >
+          Contact
+        </RouterLink>
         <a :href="profile.githubUrl" target="_blank" rel="noreferrer" @click="closeMenu">GitHub</a>
         <a class="header-email" :href="`mailto:${profile.email}`" @click="closeMenu">Email</a>
       </nav>
