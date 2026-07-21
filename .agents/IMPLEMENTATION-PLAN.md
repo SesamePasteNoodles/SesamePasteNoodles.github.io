@@ -13,7 +13,7 @@
 - HAPPET 中的角色、技術決策與解題能力。
 - GitHub 與經使用者核准公開的聯絡方式。
 
-網站必須兼具 Vercel 式閱讀效率與原 SinglePage 的黑白黃個人識別，但不仿製
+網站必須兼具 Vercel 式閱讀效率與深藍、金黃、黑色的沉穩個人識別，但不仿製
 Vercel 官網。
 
 ## 2. 範圍
@@ -24,7 +24,7 @@ Vercel 官網。
 - About、Tech Stack、Featured Projects、Experience、Contact。
 - HAPPET 專案詳情頁。
 - Portfolio 與 WinForms Ticket System 的基本詳情內容。
-- Mobile Menu、捲動導覽、必要的進場效果與圖片 Modal。
+- Mobile Menu、捲動導覽、Back to top、必要的進場效果與圖片 Modal。
 - SEO、Open Graph、效能、無障礙與 GitHub Pages 部署。
 
 ### 本次不包含
@@ -127,15 +127,19 @@ Project Detail
 工作：
 
 - 建立顏色、字體、間距、容器、圓角、邊框和動態 Token。
+- 建立深藍主背景、金／芥末黃重點色、黑色修飾與淡色文字的語意色彩 Token。
 - 實作頂部 Navbar 與 64–80px 黃色 Section Rail。
 - 建立黑底 Tech Stack、細虛線、大寫標題和編號語言。
 - 定義 `:hover`、`:focus-visible`、active、disabled 狀態。
 - 實作 `prefers-reduced-motion`。
+- 將 `hero-status`、`.router-link-active`、`.mono-label`、`.hero-eyebrow` 與同類小字的基準提高至至少 14px。
+- 以 14px、15px、16px 三個版本逐步比較，同時測試行高、字重、字距與對比，再確定最終 Token。
 
 驗收：
 
 - 黃色不搭配低對比白字。
 - 所有互動元件可看見鍵盤焦點。
+- 上述小字在 Desktop、Tablet 與 Mobile 的一般閱讀距離下均可輕鬆辨識，且未破壞標題階層或造成折行擠壓。
 - 360px 寬度無非預期水平捲動。
 - 元件視覺符合 `planning.md`，而非直接複製 Vercel。
 
@@ -179,6 +183,7 @@ Project Detail
 
 - 驗證 Desktop、Tablet、Mobile 排版。
 - 實作 Mobile Menu 與捲動章節狀態。
+- 實作 Back to top 按鈕：初始門檻為 `scrollY > 480px`，並依 Hero 實際高度驗證是否需要微調。
 - 加入 300–500ms 的必要進場效果。
 - 檢查語意標籤、標題階層、替代文字、Focus 與對比。
 - 測試 Reduced Motion。
@@ -189,6 +194,8 @@ Project Detail
 - Hover 不是唯一的資訊或操作提示。
 - 文字放大與窄螢幕不遮擋內容。
 - Mobile Menu 開啟時焦點與頁面捲動行為合理。
+- Back to top 只在超過門檻後出現，隱藏時不可聚焦，鍵盤可操作，且具有可見焦點與至少 44×44px 觸控範圍。
+- Back to top 在 Reduced Motion 模式即時回到頂端；於 Desktop、Tablet、Mobile 均不遮擋 CTA 或重要內容。
 
 ### Phase 6：SEO、效能與部署
 
