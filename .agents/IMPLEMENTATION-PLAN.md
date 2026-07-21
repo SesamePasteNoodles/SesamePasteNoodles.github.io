@@ -23,13 +23,15 @@ Vercel 官網。
 - 響應式首頁。
 - About、Tech Stack、Featured Projects、Experience、Contact。
 - HAPPET 專案詳情頁。
-- Portfolio 與 WinForms Ticket System 的基本詳情內容。
+- WinForms 個人小專案與 Codex／Anti-gravity 預設同步工具的基本詳情內容；兩者正式名稱待確認。
+- 完整 Projects 頁與資料驅動的專案詳情路由。
+- 可供未來 Git-backed CMS 使用的專案內容與媒體結構。
 - Mobile Menu、捲動導覽、必要的進場效果與圖片 Modal。
 - SEO、Open Graph、效能、無障礙與 GitHub Pages 部署。
 
 ### 本次不包含
 
-- 後台 CMS。
+- 實際啟用後台 CMS；本階段只完成 CMS-ready 內容模型與導入規格。
 - 聯絡表單與郵件寄送服務。
 - 部落格。
 - 登入、資料庫或伺服器端 API。
@@ -46,7 +48,7 @@ Vercel 官網。
 | 路由 | Vue Router Hash History | GitHub Pages 重新整理詳情頁時不需 Rewrite |
 | 樣式 | 自訂 CSS、CSS Grid、CSS Variables | 保留獨特視覺並控制產物大小 |
 | UI Framework | 初期不引入 Bootstrap | 現有需求可由原生 CSS 完成 |
-| 內容資料 | TypeScript data modules | 專案、技能和經歷可集中維護 |
+| 內容資料 | 專案獨立 JSON 內容檔；技能與經歷採 TypeScript data modules | 專案內容可由 Vue 直接讀取，並保留未來接 Git-backed CMS 的能力 |
 | 圖示 | 先使用本地 SVG | 避免不必要套件與外部請求 |
 | 部署 | GitHub Actions → GitHub Pages | 自動建置並保留可重現流程 |
 
@@ -76,13 +78,17 @@ Home
 ├── Experience
 └── Contact
 
+Projects
+└── All published projects
+
 Project Detail
 ├── HAPPET
-├── Portfolio
-└── WinForms Ticket System
+├── WinForms 個人小專案
+└── Codex／Anti-gravity 預設同步工具
 ```
 
 首頁負責掃描與導流；Project Detail 負責證明問題分析、設計選擇與實作結果。
+首頁固定人工策展三個精選專案，新增專案預設收納至 Projects，不在首頁無限累積。
 
 ## 6. 施工階段
 
@@ -112,15 +118,20 @@ Project Detail
 
 - 建立 Vue 3／TypeScript／Vite 專案。
 - 設定 Router、Hash History 與 Not Found 畫面。
-- 建立 `projects.ts`、`skills.ts`、`experience.ts`。
+- 建立每個專案獨立的 JSON 內容檔，以及 `skills.ts`、`experience.ts`。
+- 定義可排序的 Project Detail 區塊 schema，初期包含 rich text、單圖圖說、圖文雙欄、
+  多圖 gallery 與 technical highlight。
+- 每張內容圖片必須保存路徑、替代文字與圖說；圖文雙欄可選圖片左右位置。
 - 建立 Layout、Section Container、Button、Tag 與 Heading 基礎元件。
 - 使 View 聚焦於路由資料、頁面狀態與區塊組合，將具獨立職責或重用價值的 UI 拆為 Component。
 - 建立 lint、type-check、build 與 preview scripts。
 
 驗收：
 
-- 首頁與三個 Project Detail 路由可直接開啟。
+- 首頁、完整 Projects 頁與三個 Project Detail 路由可直接開啟。
 - 專案資料不重複硬編碼於多個元件。
+- 新增第四個專案內容檔時會出現在 Projects 頁，但不會自動增加首頁卡片數量。
+- 內容 schema 可對應 Git-backed CMS 的結構化欄位，不需重寫 Project Detail 元件。
 - View 不承載可獨立封裝的大型 UI 區塊。
 - 共用元件以 Props、Slots 或 Emits 提供清楚介面，且不直接依賴特定 View 的資料結構。
 - 元件拆分符合 `planning.md` 的職責與重用原則，未因追求檔案數量而過度抽象。
@@ -150,7 +161,8 @@ Project Detail
 - Hero：姓名，以及經核准的定位、主文案、CTA 與技術資訊卡。
 - About：經核准的簡介；個人照未核准時採純文字或非人物品牌圖形。
 - Tech Stack：黑底 Bento Grid。
-- Featured Projects：HAPPET 主卡與兩張副卡。
+- Featured Projects：HAPPET 主卡、WinForms 與 Codex／Anti-gravity 同步工具兩張副卡。
+- Projects：顯示所有可公開專案，並提供個別詳情入口。
 - Experience：精簡 Timeline。
 - Contact：依 `CONTENT.md` 顯示 Email 與 GitHub；履歷只有在核准後才加入。
 
@@ -166,15 +178,18 @@ Project Detail
 工作：
 
 - 建立共用 Project Hero、Overview、Technical Highlight 和 Gallery。
+- 建立依 `sections[].type` 呈現的受控內容區塊，允許排序及圖文版型切換。
 - 完成 HAPPET 的問題、設計、原因、結果敘事。
 - 加入架構圖、流程圖、截圖與可存取的 Image Modal。
-- 補齊 Portfolio 與 WinForms Ticket System 的精簡詳情頁。
+- 補齊 WinForms 個人小專案與 Codex／Anti-gravity 預設同步工具的精簡詳情頁。
 
 驗收：
 
 - HAPPET 清楚區分團隊成果與個人貢獻。
 - 每項技術亮點能說明取捨，不只列出工具名稱。
 - 圖片 Modal 支援 ESC、背景關閉、焦點管理與鍵盤切換。
+- 多圖區塊中的每張圖片都有獨立替代文字與可選圖說，Desktop、Tablet、Mobile
+  均依受控版型正確重排。
 - 直接開啟或重新整理 Hash Route 不出現 404。
 
 ### Phase 5：RWD、互動與無障礙
@@ -210,6 +225,30 @@ Project Detail
 - GitHub Pages 首頁與各 Hash Route 可正常開啟。
 - 沒有失效資源、空連結或 Console error。
 - 核心內容在 JavaScript 或動畫失敗時仍能合理閱讀。
+
+### Phase 7：Git-backed CMS（延後導入）
+
+導入時機：
+
+- 已完成並驗證 Phase 1 的內容 schema 與 Phase 4 的區塊渲染。
+- 實際新增或維護專案的頻率，已足以證明圖形化編輯介面能降低成本。
+- Repository 權限、登入方式與第三方服務依賴經使用者確認。
+
+工作：
+
+- 優先以 Pages CMS 概念驗證 JSON 內容、媒體上傳及 GitHub Commit 流程。
+- 設定可重複圖片欄位，以及每張圖片的 `alt`、`caption` 和版型欄位。
+- 以 Block 欄位管理 rich text、單圖、圖文雙欄、多圖 gallery 與技術亮點，允許排序。
+- 儲存後由 CMS Commit 回 Repository，沿用 GitHub Actions 建置與 GitHub Pages 部署。
+- Token、Client Secret 等敏感資訊只存放於核准的 Secret／後端環境，不進入瀏覽器 bundle
+  或版本控制。
+
+驗收：
+
+- 後台可新增專案、上傳多張圖片、逐張填寫替代文字與圖說，並調整區塊順序。
+- 內容提交後可在 Git 歷史追蹤與還原，且自動部署不需人工修改 Vue 元件。
+- 未授權使用者不能寫入 Repository；CMS 不擴大超出內容與媒體所需的權限。
+- CMS 暫時不可用時，仍可直接編輯內容檔並完成建置與部署。
 
 ## 7. 建議驗證矩陣
 
@@ -251,7 +290,7 @@ npm run build
 
 專案只有在以下條件全部成立時才算完成：
 
-- 首頁與三個 Project Detail 內容正確且可公開。
+- 首頁三個精選、完整 Projects 頁與三個 Project Detail 內容正確且可公開。
 - 所有連結、下載與聯絡方式有效。
 - Desktop、Tablet、Mobile 的主要流程完成驗證。
 - 鍵盤、Focus、對比、替代文字與 Reduced Motion 完成檢查。
