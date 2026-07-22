@@ -177,7 +177,7 @@ Project Detail
 - 專案卡只呈現摘要，不把 Case Study 全文塞入首頁。
 - 圖片有尺寸、替代文字與合理裁切。
 
-### Phase 4：Project Detail
+### Phase 4：Project Detail (現況：程式與互動驗收完成；HAPPET 個人貢獻內容待核准)
 
 工作：
 
@@ -195,8 +195,10 @@ Project Detail
 - 多圖區塊中的每張圖片都有獨立替代文字與可選圖說，Desktop、Tablet、Mobile
   均依受控版型正確重排。
 - 直接開啟或重新整理 Hash Route 不出現 404。
+- 實際驗證記錄：`npm run lint`、`npm run type-check`、`npm run build` 均成功通過；Image Modal 鍵盤切換 (ESC/←/→/Tab) 與 body overflow 還原完成驗證；360px、768px、1440px 視圖動態與無障礙互動已通過。
+- 狀態說明：程式與互動體驗已完成驗收，但 HAPPET 個人貢獻內容仍待 `CONTENT.md` 白名單授權核准，不因建置通過而逕行標記完整 Phase 完成。
 
-### Phase 5：RWD、互動與無障礙
+### Phase 5：RWD、互動與無障礙 (現況：程式驗收完成)
 
 工作：
 
@@ -215,6 +217,7 @@ Project Detail
 - Mobile Menu 開啟時焦點與頁面捲動行為合理。
 - Back to top 只在超過門檻後出現，隱藏時不可聚焦，鍵盤可操作，且具有可見焦點與至少 44×44px 觸控範圍。
 - Back to top 在 Reduced Motion 模式即時回到頂端；於 Desktop、Tablet、Mobile 均不遮擋 CTA 或重要內容。
+- 實際驗證記錄：1440px、768px、360px 視幅均已驗證，極窄 Viewport 無非預期水平捲動；文字放大 200% 無內容重疊；Hash Route 重畫與 404 狀態展示良好。
 
 ### Phase 6：SEO、效能與部署
 
