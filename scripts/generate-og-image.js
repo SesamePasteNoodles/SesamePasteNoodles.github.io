@@ -5,7 +5,7 @@ import path from 'node:path'
 import process from 'node:process'
 import zlib from 'node:zlib'
 
-function createPngBuffer(width: number, height: number, drawPixel: (x: number, y: number, w: number, h: number) => number[]) {
+function createPngBuffer(width, height, drawPixel) {
   // PNG signature
   const signature = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a])
 
@@ -20,7 +20,7 @@ function createPngBuffer(width: number, height: number, drawPixel: (x: number, y
     crcTable[n] = c
   }
 
-  function crc32(buf: Buffer) {
+  function crc32(buf) {
     let crc = 0xffffffff
     for (let i = 0; i < buf.length; i++) {
       crc = crcTable[(crc ^ buf[i]) & 0xff] ^ (crc >>> 8)
@@ -28,7 +28,7 @@ function createPngBuffer(width: number, height: number, drawPixel: (x: number, y
     return (crc ^ 0xffffffff) >>> 0
   }
 
-  function createChunk(type: string, data: Buffer) {
+  function createChunk(type, data) {
     const lenBuf = Buffer.alloc(4)
     lenBuf.writeUInt32BE(data.length, 0)
     const typeBuf = Buffer.from(type, 'ascii')
