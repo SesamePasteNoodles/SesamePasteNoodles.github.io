@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
 
+const route = useRoute()
 const SHOW_THRESHOLD = 480
 const isVisible = ref(false)
 
@@ -12,6 +14,13 @@ function scrollToTop() {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' })
 }
+
+watch(
+  () => route.fullPath,
+  () => {
+    updateVisibility()
+  }
+)
 
 onMounted(() => {
   updateVisibility()
