@@ -1,6 +1,9 @@
 <script setup lang="ts">
+import { useRoute } from 'vue-router'
+
 import { useActiveSection } from '@/composables/useActiveSection'
 
+const route = useRoute()
 const activeSection = useActiveSection(['intro', 'approach', 'contact'])
 </script>
 
@@ -11,7 +14,7 @@ const activeSection = useActiveSection(['intro', 'approach', 'contact'])
       <RouterLink
         to="/#intro"
         active-class=""
-        :class="{ 'section-link--active': activeSection === 'intro' }"
+        :class="{ 'section-link--active': route.path === '/' && activeSection === 'intro' }"
         aria-label="前往簡介段落"
       >
         01
@@ -19,7 +22,7 @@ const activeSection = useActiveSection(['intro', 'approach', 'contact'])
       <RouterLink
         to="/#approach"
         active-class=""
-        :class="{ 'section-link--active': activeSection === 'approach' }"
+        :class="{ 'section-link--active': route.path === '/' && activeSection === 'approach' }"
         aria-label="前往作品呈現原則"
       >
         02
@@ -27,7 +30,7 @@ const activeSection = useActiveSection(['intro', 'approach', 'contact'])
       <RouterLink
         to="/#contact"
         active-class=""
-        :class="{ 'section-link--active': activeSection === 'contact' }"
+        :class="{ 'section-link--active': route.path === '/' && activeSection === 'contact' }"
         aria-label="前往聯絡段落"
       >
         03
