@@ -3,13 +3,15 @@ import { updatePageMeta } from '@/composables/useMeta'
 import { siteConfig, getAbsoluteUrl } from '@/config/site'
 import { projects } from '@/data/projects'
 
+import HomeView from '@/views/HomeView.vue'
+
 const router = createRouter({
   history: createWebHashHistory(),
   routes: [
     {
       path: '/',
       name: 'home',
-      component: () => import('@/views/HomeView.vue'),
+      component: HomeView,
     },
     {
       path: '/projects/:slug',
