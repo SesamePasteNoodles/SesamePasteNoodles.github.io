@@ -12,40 +12,71 @@ function assert(condition, message) {
   }
 }
 
-console.log('🔍 Running Production Build Smoke Check...')
+console.log('🔍 Running Enhanced Production Build Smoke Check...')
 
-// 1. Check dist directory
+// 1. Check dist directory & index.html non-empty
 assert(fs.existsSync(distDir), '`dist` directory does not exist. Run `npm run build` first.')
 
-// 2. Check dist/index.html
 const indexPath = path.join(distDir, 'index.html')
 assert(fs.existsSync(indexPath), '`dist/index.html` does not exist.')
+const indexStat = fs.statSync(indexPath)
+assert(indexStat.size > 0, '`dist/index.html` is empty (0 bytes).')
 
 const indexContent = fs.readFileSync(indexPath, 'utf-8')
 
-// 3. Check critical HTML elements & metadata
-assert(indexContent.includes('<title>Randy Chen — Portfolio</title>'), 'Index HTML is missing <title> tag.')
-assert(indexContent.includes('name="description"'), 'Index HTML is missing description meta tag.')
-assert(indexContent.includes('name="robots"'), 'Index HTML is missing robots meta tag.')
-assert(indexContent.includes('rel="canonical"'), 'Index HTML is missing canonical link.')
-assert(indexContent.includes('property="og:title"'), 'Index HTML is missing og:title tag.')
-assert(indexContent.includes('property="og:image"'), 'Index HTML is missing og:image tag.')
+// 2. Check title tag
+assert(
+  /<title>Randy Chen — Portfolio<\/title>/.test(indexContent),
+  'Index HTML is missing valid <title> tag.',
+)
 
-// 4. Check static asset files in dist
-assert(fs.existsSync(path.join(distDir, 'favicon.svg')), '`dist/favicon.svg` is missing.')
-assert(fs.existsSync(path.join(distDir, 'favicon-32x32.png')), '`dist/favicon-32x32.png` is missing.')
-assert(fs.existsSync(path.join(distDir, 'apple-touch-icon.png')), '`dist/apple-touch-icon.png` is missing.')
-assert(fs.existsSync(path.join(distDir, 'og-default.png')), '`dist/og-default.png` is missing.')
+// 3. Check metadata tags for non-empty content / href
+const descMatch = indexContent.match(/<meta\s+name="description"\s+content="([^"]+)"/)
+assert(descMatch && descMatch[1].trim().length > 0, 'Index HTML is missing valid non-empty description meta tag.')
 
-// 5. Check JS & CSS bundles in dist/assets
+const robotsMatch = indexContent.match(/<meta\s+name="robots"\s+content="([^"]+)"/)
+assert(robotsMatch && robotsMatch[1].trim().length > 0, 'Index HTML is missing valid non-empty robots meta tag.')
+
+const canonicalMatch = indexContent.match(/<link\s+rel="canonical"\s+href="https:\/\/sesamepastenoodles\.github\.io\/?"/)
+assert(canonicalMatch, 'Index HTML is missing valid production HTTPS canonical link.')
+
+const ogTitleMatch = indexContent.match(/<meta\s+property="og:title"\s+content="([^"]+)"/)
+assert(ogTitleMatch && ogTitleMatch[1].trim().length > 0, 'Index HTML is missing valid non-empty og:title tag.')
+
+const ogImageMatch = indexContent.match(/<meta\s+property="og:image"\s+content="(https:\/\/sesamepastenoodles\.github\.io\/([^"]+))"/)
+assert(ogImageMatch, 'Index HTML default og:image is not a valid production HTTPS absolute URL.')
+
+// 4. Verify that default og:image asset file actually exists in dist/
+const defaultOgRelativePath = ogImageMatch[2]
+const defaultOgFileInDist = path.join(distDir, defaultOgRelativePath)
+assert(
+  fs.existsSync(defaultOgFileInDist) && fs.statSync(defaultOgFileInDist).size > 0,
+  `Default og:image target file \`dist/${defaultOgRelativePath}\` does not exist or is empty.`,
+)
+
+// 5. Check static icon files in dist
+const staticAssets = ['favicon.svg', 'favicon-32x32.png', 'apple-touch-icon.png', 'og-default.png']
+for (const asset of staticAssets) {
+  const assetPath = path.join(distDir, asset)
+  assert(fs.existsSync(assetPath), `Required static asset \`dist/${asset}\` is missing.`)
+  assert(fs.statSync(assetPath).size > 0, `Required static asset \`dist/${asset}\` is empty (0 bytes).`)
+}
+
+// 6. Check projects static image directory in dist/projects/
+const projectsDir = path.join(distDir, 'projects')
+assert(fs.existsSync(projectsDir), '`dist/projects` directory is missing.')
+const projectSubdirs = fs.readdirSync(projectsDir)
+assert(projectSubdirs.length > 0, '`dist/projects` directory has no project assets.')
+
+// 7. Check JS & CSS bundles in dist/assets
 const assetsDir = path.join(distDir, 'assets')
 assert(fs.existsSync(assetsDir), '`dist/assets` directory does not exist.')
 
 const assetFiles = fs.readdirSync(assetsDir)
-const hasJs = assetFiles.some((f) => f.endsWith('.js'))
-const hasCss = assetFiles.some((f) => f.endsWith('.css'))
+const hasJs = assetFiles.some((f) => f.endsWith('.js') && fs.statSync(path.join(assetsDir, f)).size > 0)
+const hasCss = assetFiles.some((f) => f.endsWith('.css') && fs.statSync(path.join(assetsDir, f)).size > 0)
 
-assert(hasJs, 'No JavaScript bundle found in `dist/assets`.')
-assert(hasCss, 'No CSS bundle found in `dist/assets`.')
+assert(hasJs, 'No valid non-empty JavaScript bundle found in `dist/assets`.')
+assert(hasCss, 'No valid non-empty CSS bundle found in `dist/assets`.')
 
-console.log('✅ All Production Build Smoke Checks Passed Successfully!')
+console.log('✅ All Enhanced Production Build Smoke Checks Passed Successfully!')
