@@ -159,6 +159,7 @@ onUnmounted(() => {
               <img
                 :src="currentImage.src"
                 :alt="currentImage.alt"
+                decoding="async"
                 class="modal-image"
               />
               <p v-if="currentImage.caption" class="modal-caption">

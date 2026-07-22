@@ -71,7 +71,7 @@ function handleSelectImage(index: number) {
                 :aria-label="`點擊放大圖片：${img.alt}`"
                 @click="handleOpenModal({ index: idx, triggerEl: $event.currentTarget as HTMLElement, images: project.images! })"
               >
-                <img :src="img.src" :alt="img.alt" loading="lazy" />
+                <img :src="img.src" :alt="img.alt" loading="lazy" decoding="async" />
               </button>
               <figcaption v-if="img.caption">{{ img.caption }}</figcaption>
             </figure>

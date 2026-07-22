@@ -45,6 +45,7 @@ function handleClick(index: number, event: MouseEvent) {
             :src="image.src"
             :alt="image.alt"
             loading="lazy"
+            decoding="async"
             class="gallery-img"
           />
           <span class="zoom-badge">🔍 點擊放大</span>

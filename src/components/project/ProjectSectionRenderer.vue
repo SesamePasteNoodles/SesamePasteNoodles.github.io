@@ -86,6 +86,7 @@ function handleGalleryOpenModal(
               :src="section.image.src"
               :alt="section.image.alt"
               loading="lazy"
+              decoding="async"
               class="media-img"
             />
             <span class="zoom-badge">🔍 點擊放大</span>
