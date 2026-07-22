@@ -1,9 +1,12 @@
 <script setup lang="ts">
+import { useId } from 'vue'
 import type { TechnicalDecisionSection } from '@/data/projects'
 
 defineProps<{
   section: TechnicalDecisionSection
 }>()
+
+const headingId = useId()
 
 function padNumber(index: number): string {
   return String(index + 1).padStart(2, '0')
@@ -11,8 +14,8 @@ function padNumber(index: number): string {
 </script>
 
 <template>
-  <section class="tech-highlights-section" aria-labelledby="tech-highlights-heading">
-    <h2 id="tech-highlights-heading" class="section-title">
+  <section class="tech-highlights-section" :aria-labelledby="headingId">
+    <h2 :id="headingId" class="section-title">
       {{ section.title || 'TECHNICAL HIGHLIGHTS' }}
     </h2>
 
