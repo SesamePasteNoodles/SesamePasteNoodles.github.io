@@ -15,7 +15,7 @@ Designed with **Deep Navy × Modern Bauhaus × Vercel-like Readability**, emphas
 - **Framework**: Vue 3 (Composition API with `<script setup>`)
 - **Language**: TypeScript & Vue TSC
 - **Build Tool**: Vite
-- **Routing**: Vue Router 4 (`createWebHashHistory`)
+- **Routing**: Vue Router 5 (`createWebHashHistory`)
 - **Styling**: Vanilla CSS, CSS Grid & CSS Custom Properties (Variables)
 - **CI/CD & Deployment**: GitHub Actions & GitHub Pages
 - **Validation**: ESLint, Vue-TSC, Production Build Smoke Checks
