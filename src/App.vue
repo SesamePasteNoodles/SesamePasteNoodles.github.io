@@ -9,7 +9,7 @@ import BackToTopButton from '@/components/shared/BackToTopButton.vue'
   <a class="skip-link" href="#main-content">跳至主要內容</a>
   <AppHeader />
   <SectionRail />
-  <main id="main-content">
+  <main id="main-content" tabindex="-1">
     <RouterView />
   </main>
   <BackToTopButton />
