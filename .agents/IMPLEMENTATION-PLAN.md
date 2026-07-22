@@ -92,6 +92,14 @@ Project Detail
 
 ## 6. 施工階段
 
+目前狀態（2026-07-23）：
+
+- Phase 0–3：已完成。
+- Phase 4：大部分實作已完成；HAPPET 個人角色、團隊規模與個人貢獻因尚未取得公開授權，保留待補。
+- Phase 5：已完成並通過人工驗收。
+- Phase 6：已完成部署、正式環境 smoke test 與 Lighthouse 驗收。
+- Phase 7：條件式階段，維持延後導入；目前 roadmap 至此為止，未規劃 Phase 8。
+
 ### Phase 0：內容盤點與技術基線
 
 工作：
@@ -199,7 +207,7 @@ Project Detail
 - 保留原因：HAPPET 個人角色、團隊規模與個人貢獻尚未取得 `CONTENT.md` 白名單授權，無法完成「區分團隊成果與個人貢獻」的內容驗收。
 - 恢復條件：取得上述內容核准後，補齊 HAPPET Case Study，重新執行內容、互動與跨裝置驗收，再標記 Phase 4 完成。
 
-### Phase 5：RWD、互動與無障礙（現況：進行中）
+### Phase 5：RWD、互動與無障礙（現況：已完成）
 
 工作：
 
@@ -219,10 +227,9 @@ Project Detail
 - Back to top 只在超過門檻後出現，隱藏時不可聚焦，鍵盤可操作，且具有可見焦點與至少 44×44px 觸控範圍。
 - Back to top 在 Reduced Motion 模式即時回到頂端；於 Desktop、Tablet、Mobile 均不遮擋 CTA 或重要內容。
 - 已有實作：Mobile Menu、捲動章節狀態、Back to top、可見 Focus、Image Modal 鍵盤操作與 Reduced Motion 支援。
-- 本階段仍須完整驗收：Desktop、Tablet、360px Mobile、200% 文字縮放、全站鍵盤導覽、Mobile Menu 焦點與捲動、Back to top 遮擋情形、對比及 Reduced Motion。
-- 完成上述驗收並修正發現的問題後，才可將 Phase 5 標記為完成並進入 Phase 6。
+- 已完成人工驗收：Desktop、Tablet、360px Mobile、200% 文字縮放、全站鍵盤導覽、Mobile Menu 焦點與捲動、Back to top 遮擋情形、對比及 Reduced Motion。
 
-### Phase 6：SEO、效能與部署
+### Phase 6：SEO、效能與部署（現況：已完成）
 
 工作：
 
@@ -238,6 +245,8 @@ Project Detail
 - GitHub Pages 首頁與各 Hash Route 可正常開啟。
 - 沒有失效資源、空連結或 Console error。
 - 核心內容在 JavaScript 或動畫失敗時仍能合理閱讀。
+- 正式環境 Lighthouse 驗收結果：Desktop Performance 100、Mobile Performance 99，CLS 均為 0；Accessibility、Best Practices 與 SEO 均為 100。
+- 修正前後 Lighthouse HTML／JSON 報告保存於 `reports/`，並已納入版本控制。
 
 ### Phase 7：Git-backed CMS（延後導入）
 
@@ -314,9 +323,9 @@ npm run build
 
 ## 10. 下一個執行點
 
-下一步只進行 Phase 0：
+目前 Phase 0–3、Phase 5 與 Phase 6 已完成；後續依下列順序處理：
 
-1. 確認正式新專案目錄位置。
-2. 盤點並補齊第 4 節內容與素材。
-3. 覆核技術基線。
-4. 在取得必要內容後，再建立 Vue 專案骨架。
+1. 取得 HAPPET 個人角色、團隊規模與個人貢獻的公開授權後，恢復 Phase 4 並完成內容與跨裝置驗收。
+2. Phase 4 完成後，依第 9 節執行一次全站 Definition of Done 複核。
+3. 僅在 Phase 7 的導入條件成立並經使用者確認後，才開始 Git-backed CMS 實作。
+4. 若 Phase 7 導入條件尚未成立，維持現有資料模組與 GitHub Pages 部署流程，不新增後續 Phase。

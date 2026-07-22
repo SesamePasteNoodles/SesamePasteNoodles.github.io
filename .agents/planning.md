@@ -840,6 +840,10 @@ Router 或既有部署流程。登入與 Repository 寫入憑證不得存入前�
 
 本節只保留階段摘要；詳細任務與驗收條件見 `IMPLEMENTATION-PLAN.md`。
 
+目前狀態（2026-07-23）：Phase 0–3、Phase 5 與 Phase 6 已完成；Phase 4 因 HAPPET
+個人角色、團隊規模與個人貢獻尚未取得公開授權而保留待補；Phase 7 為需求成立時才導入的
+條件式階段。目前 roadmap 規劃至 Phase 7，未規劃 Phase 8。
+
 ### Phase 0：內容與技術基線
 
 - 依 `.agents/CONTENT.md` 確認公開資訊，並確認專案角色與公開範圍
