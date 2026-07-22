@@ -13,7 +13,7 @@
 - HAPPET 中的角色、技術決策與解題能力。
 - GitHub 與經使用者核准公開的聯絡方式。
 
-網站必須兼具 Vercel 式閱讀效率與原 SinglePage 的黑白黃個人識別，但不仿製
+網站必須兼具 Vercel 式閱讀效率與深藍、金黃、黑色的沉穩個人識別，但不仿製
 Vercel 官網。
 
 ## 2. 範圍
@@ -23,10 +23,10 @@ Vercel 官網。
 - 響應式首頁。
 - About、Tech Stack、Featured Projects、Experience、Contact。
 - HAPPET 專案詳情頁。
-- WinForms 個人小專案與 Codex／Anti-gravity 預設同步工具的基本詳情內容；兩者正式名稱待確認。
+- WinForms 個人小專案與 AI Agent 全域規範同步系統的基本詳情內容；WinForms 專案正式名稱待確認。
 - 完整 Projects 頁與資料驅動的專案詳情路由。
 - 可供未來 Git-backed CMS 使用的專案內容與媒體結構。
-- Mobile Menu、捲動導覽、必要的進場效果與圖片 Modal。
+- Mobile Menu、捲動導覽、Back to top、必要的進場效果與圖片 Modal。
 - SEO、Open Graph、效能、無障礙與 GitHub Pages 部署。
 
 ### 本次不包含
@@ -84,7 +84,7 @@ Projects
 Project Detail
 ├── HAPPET
 ├── WinForms 個人小專案
-└── Codex／Anti-gravity 預設同步工具
+└── AI Agent 全域規範同步系統
 ```
 
 首頁負責掃描與導流；Project Detail 負責證明問題分析、設計選擇與實作結果。
@@ -142,15 +142,19 @@ Project Detail
 工作：
 
 - 建立顏色、字體、間距、容器、圓角、邊框和動態 Token。
+- 建立深藍主背景、金／芥末黃重點色、黑色修飾與淡色文字的語意色彩 Token。
 - 實作頂部 Navbar 與 64–80px 黃色 Section Rail。
 - 建立黑底 Tech Stack、細虛線、大寫標題和編號語言。
 - 定義 `:hover`、`:focus-visible`、active、disabled 狀態。
 - 實作 `prefers-reduced-motion`。
+- 將 `hero-status`、`.router-link-active`、`.mono-label`、`.hero-eyebrow` 與同類小字的基準提高至至少 14px。
+- 以 14px、15px、16px 三個版本逐步比較，同時測試行高、字重、字距與對比，再確定最終 Token。
 
 驗收：
 
 - 黃色不搭配低對比白字。
 - 所有互動元件可看見鍵盤焦點。
+- 上述小字在 Desktop、Tablet 與 Mobile 的一般閱讀距離下均可輕鬆辨識，且未破壞標題階層或造成折行擠壓。
 - 360px 寬度無非預期水平捲動。
 - 元件視覺符合 `planning.md`，而非直接複製 Vercel。
 
@@ -161,7 +165,7 @@ Project Detail
 - Hero：姓名，以及經核准的定位、主文案、CTA 與技術資訊卡。
 - About：經核准的簡介；個人照未核准時採純文字或非人物品牌圖形。
 - Tech Stack：黑底 Bento Grid。
-- Featured Projects：HAPPET 主卡、WinForms 與 Codex／Anti-gravity 同步工具兩張副卡。
+- Featured Projects：HAPPET 主卡、WinForms 與 AI Agent 全域規範同步系統兩張副卡。
 - Projects：顯示所有可公開專案，並提供個別詳情入口。
 - Experience：精簡 Timeline。
 - Contact：依 `CONTENT.md` 顯示 Email 與 GitHub；履歷只有在核准後才加入。
@@ -173,7 +177,7 @@ Project Detail
 - 專案卡只呈現摘要，不把 Case Study 全文塞入首頁。
 - 圖片有尺寸、替代文字與合理裁切。
 
-### Phase 4：Project Detail
+### Phase 4：Project Detail（現況：保留待補）
 
 工作：
 
@@ -181,7 +185,7 @@ Project Detail
 - 建立依 `sections[].type` 呈現的受控內容區塊，允許排序及圖文版型切換。
 - 完成 HAPPET 的問題、設計、原因、結果敘事。
 - 加入架構圖、流程圖、截圖與可存取的 Image Modal。
-- 補齊 WinForms 個人小專案與 Codex／Anti-gravity 預設同步工具的精簡詳情頁。
+- 補齊 WinForms 個人小專案與 AI Agent 全域規範同步系統的精簡詳情頁。
 
 驗收：
 
@@ -191,13 +195,17 @@ Project Detail
 - 多圖區塊中的每張圖片都有獨立替代文字與可選圖說，Desktop、Tablet、Mobile
   均依受控版型正確重排。
 - 直接開啟或重新整理 Hash Route 不出現 404。
+- 已完成範圍：共用詳情元件、受控內容區塊、三個專案詳情、Image Modal，以及相關 lint、type-check 與 production build。
+- 保留原因：HAPPET 個人角色、團隊規模與個人貢獻尚未取得 `CONTENT.md` 白名單授權，無法完成「區分團隊成果與個人貢獻」的內容驗收。
+- 恢復條件：取得上述內容核准後，補齊 HAPPET Case Study，重新執行內容、互動與跨裝置驗收，再標記 Phase 4 完成。
 
-### Phase 5：RWD、互動與無障礙
+### Phase 5：RWD、互動與無障礙（現況：進行中）
 
 工作：
 
 - 驗證 Desktop、Tablet、Mobile 排版。
 - 實作 Mobile Menu 與捲動章節狀態。
+- 實作 Back to top 按鈕：初始門檻為 `scrollY > 480px`，並依 Hero 實際高度驗證是否需要微調。
 - 加入 300–500ms 的必要進場效果。
 - 檢查語意標籤、標題階層、替代文字、Focus 與對比。
 - 測試 Reduced Motion。
@@ -208,6 +216,11 @@ Project Detail
 - Hover 不是唯一的資訊或操作提示。
 - 文字放大與窄螢幕不遮擋內容。
 - Mobile Menu 開啟時焦點與頁面捲動行為合理。
+- Back to top 只在超過門檻後出現，隱藏時不可聚焦，鍵盤可操作，且具有可見焦點與至少 44×44px 觸控範圍。
+- Back to top 在 Reduced Motion 模式即時回到頂端；於 Desktop、Tablet、Mobile 均不遮擋 CTA 或重要內容。
+- 已有實作：Mobile Menu、捲動章節狀態、Back to top、可見 Focus、Image Modal 鍵盤操作與 Reduced Motion 支援。
+- 本階段仍須完整驗收：Desktop、Tablet、360px Mobile、200% 文字縮放、全站鍵盤導覽、Mobile Menu 焦點與捲動、Back to top 遮擋情形、對比及 Reduced Motion。
+- 完成上述驗收並修正發現的問題後，才可將 Phase 5 標記為完成並進入 Phase 6。
 
 ### Phase 6：SEO、效能與部署
 

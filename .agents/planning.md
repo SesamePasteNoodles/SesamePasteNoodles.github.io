@@ -6,8 +6,8 @@
 
 ## 零、已確立的設計決策
 
-- 採用「Vercel 的閱讀效率＋原 SinglePage 的黑白黃包浩斯個性」，不直接複製 Vercel。
-- 保留原版最有辨識度的元素：芥末黃、黑白區塊交錯、大寫標題、細實線／虛線、黑白人物影像。
+- 採用「Vercel 的閱讀效率＋深藍、金黃與黑色的 Modern Bauhaus 個性」，不直接複製 Vercel。
+- 下一版視覺驗證以深藍為主體、金／芥末黃為重點、黑色為修飾；保留大寫標題、細實線／虛線與幾何編排。
 - 首頁以快速理解與專案導流為主，技術深度移至 Project Detail／Case Study。
 - 桌面版採頂部導覽搭配窄版黃色側軌，不再使用占畫面 20% 的大型固定側欄。
 - Hero 使用技術資訊卡，不使用圖庫人物照；About 只有在個人照獲准公開後才使用，
@@ -18,15 +18,15 @@
 
 ## 一、設計方向
 
-網站以 **Hybrid Vercel × Modern Bauhaus** 為方向。比例只用來表達設計優先順序：
+網站以 **Deep Navy × Modern Bauhaus × Vercel-like Readability** 為方向。比例只用來表達設計優先順序：
 
 - 70%：本專案的資訊架構、專案敘事與 Case Study。
-- 25%：原 SinglePage 的黑白黃品牌性格。
+- 25%：深藍、金黃與黑色建立的沉穩個人識別。
 - 5%：Vercel 的字體、留白、細框線與工程感。
 
 從 Vercel 參考中採用：
 
-- 黑白灰主色
+- 高對比的深色底與淡色文字
 - 大量留白
 - 細線框與 Grid 排版
 - 清楚的字級階層
@@ -41,14 +41,14 @@
 - 不規則 Bento Grid
 - 卡片 Hover 動態
 - 技術標籤與編號點綴
-- 黑色與淺灰區塊交錯
+- 深藍區塊為主，墨黑用於導覽、Tech Stack 或局部分隔
 - 窄版黃色側軌
 - 大寫章節標題與細虛線
 - About 區塊經核准的黑白人物照，或非人物品牌圖形
 
 整體風格定位：
 
-> 精準、專業、帶有工程感，並保有鮮明而可信的個人識別。
+> 沉穩、理性、有工程深度，以克制的金黃細節保留銳度與個人識別。
 
 ---
 
@@ -59,25 +59,26 @@
 #### 基礎色
 
 ```css
---color-background: #ffffff;
---color-background-soft: #fafafa;
---color-background-muted: #f5f5f5;
+--color-background: #081526;
+--color-background-soft: #10243e;
+--color-background-muted: #172d48;
 
---color-text: #171717;
---color-text-secondary: #666666;
---color-text-muted: #888888;
+--color-text: #f2f1ec;
+--color-text-secondary: #c8d0da;
+--color-text-muted: #aab6c5;
 
---color-border: #eaeaea;
---color-border-strong: #d4d4d4;
+--color-border: #30435a;
+--color-border-strong: #52647a;
+--color-ink: #05080d;
 ```
 
 #### 品牌色
 
 ```css
---color-primary: #f5c518;
---color-primary-hover: #e0b300;
---color-primary-soft: #fff8d6;
---color-primary-strong: #b88d00;
+--color-primary: #d6a928;
+--color-primary-hover: #e3bb45;
+--color-primary-soft: #2b2a20;
+--color-primary-strong: #f0cd69;
 ```
 
 品牌黃主要使用於：
@@ -90,7 +91,8 @@
 - 小型圖示
 - Hero 光暈
 
-避免大面積使用黃色，防止視覺過度刺激。
+避免大面積使用黃色，金黃視覺佔比原則上控制在 5–10%。
+黑色主要用於導覽、卡片層次、Tech Stack 與操作狀態，不與深藍大面積混用而失去層次。
 
 ---
 
@@ -130,11 +132,16 @@ Section Title     40–48px
 Project Title     28–36px
 Card Title        20–24px
 Body              16–18px
-Caption           13–14px
-Technical Label   12–13px
+Caption           14–16px
+Technical Label   14–15px
 ```
 
 手機版 Hero Title 降至 42–48px。
+
+`hero-status`、`.router-link-active`、`.mono-label`、`.hero-eyebrow` 與同類輔助小字，
+桌面、平板與手機的實際呈現原則上不得小於 14px。下一版從 14px 起分階段比較
+14px、15px 與 16px，連同行高、字重、字距與對比一起調整，以一般閱讀距離下
+不需費力辨識，且不破壞視覺階層為驗收依據。不得單靠全大寫或過大字距強化識別。
 
 ---
 
@@ -439,7 +446,7 @@ RESTful API、身分驗證與交易流程實作。
 
 1. HAPPET
 2. WinForms 個人小專案（正式名稱待確認）
-3. Codex／Anti-gravity 預設同步工具（正式名稱待確認）
+3. AI Agent 全域規範同步系統
 
 首頁只負責精選與導流，不隨專案總數增加而持續堆疊。三個名額由內容資料的
 `featured` 與 `featuredOrder` 明確控制，不自動等同最新三個專案。第四個之後的
@@ -637,6 +644,14 @@ Hover 時：
 文字：黑色 → 深黃色
 ```
 
+### Back to top
+
+- 預設在 `window.scrollY > 480px` 時顯示，480px 為新版測試的初始門檻，可依實際 Hero 高度微調。
+- 按鈕固定於視窗右下角，需考慮 Mobile safe area，不得遮擋 CTA 或其他固定操作。
+- 觸發後回到頁面頂端；一般模式可平滑捲動，`prefers-reduced-motion: reduce` 時改為即時跳轉。
+- 使用真實 `<button>`，提供可理解的 accessible name、可見 `:focus-visible` 狀態與至少 44×44px 觸控範圍。
+- 顯示與隱藏不得造成版面位移；隱藏時不得留在鍵盤 Tab 順序中。
+
 ### 圖片 Modal
 
 適用於：
@@ -733,6 +748,7 @@ src/
 │       ├── TechTag.vue
 │       ├── ProjectCard.vue
 │       ├── SectionHeading.vue
+│       ├── BackToTopButton.vue
 │       └── ImageModal.vue
 │
 ├── views/
@@ -744,7 +760,7 @@ src/
 │   └── projects/
 │       ├── happet.json
 │       ├── winforms-project.json
-│       └── codex-settings-sync.json
+│       └── ai-agent-rules-sync.json
 │
 ├── data/
 │   ├── skills.ts
@@ -777,12 +793,12 @@ src/
 src/content/projects/
 ├── happet.json
 ├── winforms-project.json
-└── codex-settings-sync.json
+└── ai-agent-rules-sync.json
 
 public/images/projects/
 ├── happet/
 ├── winforms-project/
-└── codex-settings-sync/
+└── ai-agent-rules-sync/
 ```
 
 內容檔至少包含：
@@ -868,7 +884,7 @@ Router 或既有部署流程。登入與 Repository 寫入憑證不得存入前�
 - Screenshots
 - Lessons Learned
 - WinForms 個人小專案
-- Codex／Anti-gravity 預設同步工具
+- AI Agent 全域規範同步系統
 
 ### Phase 5：互動與 RWD
 
