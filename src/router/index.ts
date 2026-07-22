@@ -49,7 +49,7 @@ router.afterEach((to) => {
     if (project) {
       const firstImage = project.images?.[0]
       const ogImage = firstImage
-        ? getAbsoluteUrl(firstImage.src.startsWith('/') ? firstImage.src : `/images/${firstImage.src}`)
+        ? getAbsoluteUrl(firstImage.src.startsWith('/') ? firstImage.src : `/${firstImage.src}`)
         : getAbsoluteUrl(siteConfig.defaultOgImage)
 
       updatePageMeta({
