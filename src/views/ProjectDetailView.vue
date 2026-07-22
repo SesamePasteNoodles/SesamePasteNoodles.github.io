@@ -1,172 +1,154 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useRoute } from 'vue-router'
-
+import { ref, computed } from 'vue'
+import { useRoute, RouterLink } from 'vue-router'
 import { projects } from '@/data/projects'
+import type { ProjectImage } from '@/data/projects'
+
+import ProjectHero from '@/components/project/ProjectHero.vue'
+import ProjectSectionRenderer from '@/components/project/ProjectSectionRenderer.vue'
+import ProjectActions from '@/components/project/ProjectActions.vue'
+import ImageModal from '@/components/shared/ImageModal.vue'
 
 const route = useRoute()
 const project = computed(() => projects.find((item) => item.slug === route.params.slug))
+
+// Modal state management
+const isModalOpen = ref(false)
+const modalImages = ref<ProjectImage[]>([])
+const activeImageIndex = ref(0)
+const activeTriggerEl = ref<HTMLElement | null>(null)
+
+function handleOpenModal(payload: {
+  index: number
+  triggerEl: HTMLElement
+  images: ProjectImage[]
+}) {
+  modalImages.value = payload.images
+  activeImageIndex.value = payload.index
+  activeTriggerEl.value = payload.triggerEl
+  isModalOpen.value = true
+}
+
+function handleCloseModal() {
+  isModalOpen.value = false
+}
+
+function handleSelectImage(index: number) {
+  activeImageIndex.value = index
+}
 </script>
 
 <template>
-  <section class="route-page">
-    <p class="mono-label">PROJECT DETAIL</p>
-
+  <article class="project-detail-page">
     <template v-if="project">
-      <h1>{{ project.name }}</h1>
-      <p v-if="project.summary" class="route-page-copy">{{ project.summary }}</p>
+      <ProjectHero :project="project" />
 
-      <dl v-if="project.status || project.period || project.license" class="project-facts">
-        <div v-if="project.status">
-          <dt>STATUS</dt>
-          <dd>{{ project.status }}</dd>
-        </div>
-        <div v-if="project.period">
-          <dt>VERIFIED PERIOD</dt>
-          <dd>{{ project.period }}</dd>
-        </div>
-        <div v-if="project.license">
-          <dt>LICENSE</dt>
-          <dd>{{ project.license }}</dd>
-        </div>
-      </dl>
+      <!-- Section Renderer for Structured Sections -->
+      <ProjectSectionRenderer
+        v-if="project.sections?.length"
+        :sections="project.sections"
+        @open-modal="handleOpenModal"
+      />
 
-      <section v-if="project.technologies?.length" class="project-detail-section">
-        <h2>TECH STACK</h2>
-        <ul class="project-tag-list" aria-label="專案技術">
-          <li v-for="technology in project.technologies" :key="technology">
-            {{ technology }}
-          </li>
-        </ul>
-      </section>
+      <!-- Fallback / Default Renderer if no sections defined -->
+      <template v-else>
+        <section v-if="project.highlights?.length" class="legacy-section">
+          <h2 class="section-title">TECHNICAL HIGHLIGHTS</h2>
+          <ul class="highlight-list">
+            <li v-for="highlight in project.highlights" :key="highlight">
+              {{ highlight }}
+            </li>
+          </ul>
+        </section>
 
-      <section v-if="project.highlights?.length" class="project-detail-section">
-        <h2>TECHNICAL HIGHLIGHTS</h2>
-        <ul class="project-highlight-list">
-          <li v-for="highlight in project.highlights" :key="highlight">
-            {{ highlight }}
-          </li>
-        </ul>
-      </section>
+        <section v-if="project.images?.length" class="legacy-section">
+          <h2 class="section-title">PROJECT GALLERY</h2>
+          <div class="legacy-gallery">
+            <figure v-for="(img, idx) in project.images" :key="img.src">
+              <button
+                type="button"
+                class="legacy-img-btn"
+                :aria-label="`點擊放大圖片：${img.alt}`"
+                @click="handleOpenModal({ index: idx, triggerEl: $event.currentTarget as HTMLElement, images: project.images! })"
+              >
+                <img :src="img.src" :alt="img.alt" loading="lazy" />
+              </button>
+              <figcaption v-if="img.caption">{{ img.caption }}</figcaption>
+            </figure>
+          </div>
+        </section>
+      </template>
 
-      <section v-if="project.images?.length" class="project-detail-section">
-        <h2>PROJECT GALLERY</h2>
-        <div class="project-gallery">
-          <figure v-for="image in project.images" :key="image.src">
-            <img :src="image.src" :alt="image.alt" loading="lazy" />
-            <figcaption v-if="image.caption">{{ image.caption }}</figcaption>
-          </figure>
-        </div>
-      </section>
+      <!-- Project Actions (Repo & Demo links, zero output if none exist) -->
+      <ProjectActions
+        :repository-url="project.repositoryUrl"
+        :demo-url="project.demoUrl"
+      />
+    </template>
 
-      <div v-if="project.repositoryUrl || project.demoUrl" class="project-actions">
-        <a
-          v-if="project.repositoryUrl"
-          class="text-link"
-          :href="project.repositoryUrl"
-          target="_blank"
-          rel="noreferrer"
-        >
-          查看 Repository ↗
-        </a>
-        <a
-          v-if="project.demoUrl"
-          class="text-link"
-          :href="project.demoUrl"
-          target="_blank"
-          rel="noreferrer"
-        >
-          查看 Demo ↗
-        </a>
+    <!-- Not Found / Pending Published State -->
+    <template v-else>
+      <div class="not-found-container">
+        <p class="mono-label">STATUS 404 ／ PENDING</p>
+        <h1 class="not-found-title">PROJECT CONTENT NOT FOUND</h1>
+        <p class="not-found-copy">
+          要求的專案不存在，或內容尚未過核可公開。請確認網址是否正確。
+        </p>
+        <RouterLink to="/" class="back-home-btn">← 回到作品集首頁</RouterLink>
       </div>
     </template>
 
-    <template v-else>
-      <p class="route-index">PENDING</p>
-      <h1>PROJECT CONTENT<br />NOT PUBLISHED.</h1>
-      <p class="route-page-copy">
-        專案內容會在文字與素材確認可公開後顯示。
-      </p>
-    </template>
-
-    <RouterLink class="text-link" to="/">← 回到首頁</RouterLink>
-  </section>
+    <!-- Global Accessible Image Gallery Modal -->
+    <ImageModal
+      :is-open="isModalOpen"
+      :images="modalImages"
+      :current-index="activeImageIndex"
+      :trigger-element="activeTriggerEl"
+      @close="handleCloseModal"
+      @select="handleSelectImage"
+    />
+  </article>
 </template>
 
 <style scoped>
-.project-facts {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
-  gap: 1px;
-  margin: 2.5rem 0;
-  border: 1px solid var(--color-border);
-  background: var(--color-border);
+.project-detail-page {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 5rem;
 }
 
-.project-facts div {
-  padding: 1rem;
-  background: var(--color-background-soft);
-}
-
-.project-facts dt,
-.project-detail-section h2 {
+.section-title {
+  margin-bottom: 1.25rem;
   color: var(--color-primary-strong);
   font-family: var(--font-mono);
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-.project-facts dd {
-  margin: 0.5rem 0 0;
-  color: var(--color-text-secondary);
-}
-
-.project-detail-section {
+.legacy-section {
   margin: 2.5rem 0;
 }
 
-.project-tag-list,
-.project-highlight-list {
-  margin: 1rem 0 0;
-}
-
-.project-tag-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  padding: 0;
-  list-style: none;
-}
-
-.project-tag-list li {
-  border: 1px solid var(--color-border-strong);
-  border-radius: 999px;
-  padding: 0.45rem 0.75rem;
-  color: var(--color-text-secondary);
-  font-family: var(--font-mono);
-  font-size: 0.875rem;
-}
-
-.project-highlight-list {
+.highlight-list {
   display: grid;
   gap: 0.75rem;
   padding-left: 1.25rem;
   color: var(--color-text-secondary);
 }
 
-.project-highlight-list li::marker {
+.highlight-list li::marker {
   color: var(--color-primary);
 }
 
-.project-gallery {
+.legacy-gallery {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
-  margin-top: 1rem;
+  gap: 1.25rem;
 }
 
-.project-gallery figure {
+.legacy-gallery figure {
   margin: 0;
   overflow: hidden;
   border: 1px solid var(--color-border);
@@ -174,27 +156,81 @@ const project = computed(() => projects.find((item) => item.slug === route.param
   background: var(--color-background-soft);
 }
 
-.project-gallery img {
+.legacy-img-btn {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.legacy-gallery img {
   display: block;
   width: 100%;
   aspect-ratio: 16 / 10;
   object-fit: cover;
 }
 
-.project-gallery figcaption {
+.legacy-gallery figcaption {
   padding: 0.875rem 1rem;
   color: var(--color-text-secondary);
+  font-size: 0.875rem;
 }
 
-.project-actions {
+/* Not found view styling */
+.not-found-container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  margin: 2.5rem 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+  padding: 4rem 2rem;
+  border: 1px dashed var(--color-border-strong);
+  border-radius: 0.75rem;
+  background: var(--color-background-soft);
+}
+
+.not-found-title {
+  margin: 0;
+  color: var(--color-text);
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 800;
+}
+
+.not-found-copy {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.back-home-btn {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--color-primary);
+  border-radius: 0.5rem;
+  background: var(--color-primary);
+  color: var(--color-ink);
+  font-family: var(--font-mono);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.back-home-btn:hover {
+  background: var(--color-primary-hover);
+}
+
+.back-home-btn:focus-visible {
+  outline: 2px solid var(--color-primary-strong);
+  outline-offset: 3px;
 }
 
 @media (max-width: 42rem) {
-  .project-gallery {
+  .legacy-gallery {
     grid-template-columns: 1fr;
   }
 }
