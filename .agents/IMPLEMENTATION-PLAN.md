@@ -23,7 +23,7 @@ Vercel 官網。
 - 響應式首頁。
 - About、Tech Stack、Featured Projects、Experience、Contact。
 - HAPPET 專案詳情頁。
-- WinForms 個人小專案與 Codex／Anti-gravity 預設同步工具的基本詳情內容；兩者正式名稱待確認。
+- WinForms 個人小專案與 AI Agent 全域規範同步系統的基本詳情內容；WinForms 專案正式名稱待確認。
 - 完整 Projects 頁與資料驅動的專案詳情路由。
 - 可供未來 Git-backed CMS 使用的專案內容與媒體結構。
 - Mobile Menu、捲動導覽、Back to top、必要的進場效果與圖片 Modal。
@@ -84,7 +84,7 @@ Projects
 Project Detail
 ├── HAPPET
 ├── WinForms 個人小專案
-└── Codex／Anti-gravity 預設同步工具
+└── AI Agent 全域規範同步系統
 ```
 
 首頁負責掃描與導流；Project Detail 負責證明問題分析、設計選擇與實作結果。
@@ -165,7 +165,7 @@ Project Detail
 - Hero：姓名，以及經核准的定位、主文案、CTA 與技術資訊卡。
 - About：經核准的簡介；個人照未核准時採純文字或非人物品牌圖形。
 - Tech Stack：黑底 Bento Grid。
-- Featured Projects：HAPPET 主卡、WinForms 與 Codex／Anti-gravity 同步工具兩張副卡。
+- Featured Projects：HAPPET 主卡、WinForms 與 AI Agent 全域規範同步系統兩張副卡。
 - Projects：顯示所有可公開專案，並提供個別詳情入口。
 - Experience：精簡 Timeline。
 - Contact：依 `CONTENT.md` 顯示 Email 與 GitHub；履歷只有在核准後才加入。
@@ -185,7 +185,7 @@ Project Detail
 - 建立依 `sections[].type` 呈現的受控內容區塊，允許排序及圖文版型切換。
 - 完成 HAPPET 的問題、設計、原因、結果敘事。
 - 加入架構圖、流程圖、截圖與可存取的 Image Modal。
-- 補齊 WinForms 個人小專案與 Codex／Anti-gravity 預設同步工具的精簡詳情頁。
+- 補齊 WinForms 個人小專案與 AI Agent 全域規範同步系統的精簡詳情頁。
 
 驗收：
 

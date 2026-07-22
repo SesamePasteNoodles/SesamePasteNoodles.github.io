@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import BaseButton from '@/components/shared/BaseButton.vue'
-import { profile } from '@/data/profile'
+import BaseButton from "@/components/shared/BaseButton.vue";
+import { profile } from "@/data/profile";
 </script>
 
 <template>
@@ -18,7 +18,9 @@ import { profile } from '@/data/profile'
 
       <div class="hero-actions">
         <BaseButton :href="`mailto:${profile.email}`">Email</BaseButton>
-        <BaseButton :href="profile.githubUrl" external variant="secondary">GitHub</BaseButton>
+        <BaseButton :href="profile.githubUrl" external variant="secondary">
+          GitHub
+        </BaseButton>
       </div>
     </div>
 
@@ -30,15 +32,21 @@ import { profile } from '@/data/profile'
         </div>
         <div class="signal-panel__core" aria-hidden="true">
           <span class="signal-orbit"></span>
-          <span class="signal-axis signal-axis--horizontal"></span>
-          <span class="signal-axis signal-axis--vertical"></span>
-          <span class="signal-node"></span>
           <strong>RC</strong>
         </div>
         <dl class="signal-panel__list">
-          <div><dt>01</dt><dd>PUBLIC PROFILE</dd></div>
-          <div><dt>02</dt><dd>SELECTED WORK</dd></div>
-          <div><dt>03</dt><dd>VERIFIED LINKS</dd></div>
+          <div>
+            <dt>01</dt>
+            <dd>PUBLIC PROFILE</dd>
+          </div>
+          <div>
+            <dt>02</dt>
+            <dd>SELECTED WORK</dd>
+          </div>
+          <div>
+            <dt>03</dt>
+            <dd>VERIFIED LINKS</dd>
+          </div>
         </dl>
       </div>
     </div>

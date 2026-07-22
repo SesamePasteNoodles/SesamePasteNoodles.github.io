@@ -446,7 +446,7 @@ RESTful API、身分驗證與交易流程實作。
 
 1. HAPPET
 2. WinForms 個人小專案（正式名稱待確認）
-3. Codex／Anti-gravity 預設同步工具（正式名稱待確認）
+3. AI Agent 全域規範同步系統
 
 首頁只負責精選與導流，不隨專案總數增加而持續堆疊。三個名額由內容資料的
 `featured` 與 `featuredOrder` 明確控制，不自動等同最新三個專案。第四個之後的
@@ -760,7 +760,7 @@ src/
 │   └── projects/
 │       ├── happet.json
 │       ├── winforms-project.json
-│       └── codex-settings-sync.json
+│       └── ai-agent-rules-sync.json
 │
 ├── data/
 │   ├── skills.ts
@@ -793,12 +793,12 @@ src/
 src/content/projects/
 ├── happet.json
 ├── winforms-project.json
-└── codex-settings-sync.json
+└── ai-agent-rules-sync.json
 
 public/images/projects/
 ├── happet/
 ├── winforms-project/
-└── codex-settings-sync/
+└── ai-agent-rules-sync/
 ```
 
 內容檔至少包含：
@@ -884,7 +884,7 @@ Router 或既有部署流程。登入與 Repository 寫入憑證不得存入前�
 - Screenshots
 - Lessons Learned
 - WinForms 個人小專案
-- Codex／Anti-gravity 預設同步工具
+- AI Agent 全域規範同步系統
 
 ### Phase 5：互動與 RWD
 
