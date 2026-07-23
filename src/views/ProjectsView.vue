@@ -1,8 +1,11 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import { profile } from '@/data/profile'
-import { projects } from '@/data/projects'
+import { getProjectsForOverview } from '@/data/projects'
 import ProjectBentoCard from '@/components/projects/ProjectBentoCard.vue'
 import BaseButton from '@/components/shared/BaseButton.vue'
+
+const overviewProjects = computed(() => getProjectsForOverview())
 </script>
 
 <template>
@@ -17,7 +20,7 @@ import BaseButton from '@/components/shared/BaseButton.vue'
 
     <main class="projects-page__bento-grid" aria-label="專案總覽列表">
       <div
-        v-for="(project, index) in projects"
+        v-for="(project, index) in overviewProjects"
         :key="project.slug"
         class="bento-grid-item"
         :class="{ 'bento-grid-item--featured': index === 0 }"

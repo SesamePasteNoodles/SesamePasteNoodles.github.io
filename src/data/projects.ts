@@ -506,3 +506,16 @@ export function getFeaturedProjects(): Project[] {
     .filter((p) => p.featured)
     .sort((a, b) => (a.featuredOrder ?? Infinity) - (b.featuredOrder ?? Infinity))
 }
+
+export function getProjectsForOverview(): Project[] {
+  return [...projects].sort((a, b) => {
+    const orderA = a.featuredOrder
+    const orderB = b.featuredOrder
+    if (orderA !== undefined && orderB !== undefined) {
+      return orderA - orderB
+    }
+    if (orderA !== undefined) return -1
+    if (orderB !== undefined) return 1
+    return 0
+  })
+}
