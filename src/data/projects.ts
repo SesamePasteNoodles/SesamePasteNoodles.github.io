@@ -409,9 +409,9 @@ export const projects: Project[] = [
     license: 'MIT',
     images: [
       {
-        src: 'projects/ai-agent/main-menu.jpg',
-        alt: 'AI Agent 全域規範同步系統 PowerShell 主選單介面',
-        caption: '提供直覺式選單操作，支援同步、預覽 diff、SHA-256 驗證與自動回滾。',
+        src: 'projects/ai-agent/ui-main-menu.png',
+        alt: 'AI Agent 規範管理工具的 Windows 命令列主選單，列出檢查狀態、預覽同步、同步全部與備份還原等操作',
+        caption: '提供直覺式命令列選單操作，支援檢查狀態、預覽同步、SHA-256 比對與備份還原。',
       },
     ],
     sections: [
@@ -490,9 +490,9 @@ export const projects: Project[] = [
         columns: 1,
         images: [
           {
-            src: 'projects/ai-agent/main-menu.jpg',
-            alt: 'AI Agent 全域規範同步系統 PowerShell 主選單介面',
-            caption: '提供直覺式選單操作，支援同步、預覽 diff、SHA-256 驗證與自動回滾。',
+            src: 'projects/ai-agent/ui-main-menu.png',
+            alt: 'AI Agent 規範管理工具的 Windows 命令列主選單，列出檢查狀態、預覽同步、同步全部與備份還原等操作',
+            caption: '提供直覺式命令列選單操作，支援檢查狀態、預覽同步、SHA-256 比對與備份還原。',
           },
         ],
       },
