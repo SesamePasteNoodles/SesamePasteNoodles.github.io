@@ -145,9 +145,9 @@ onBeforeUnmount(() => {
           Intro
         </RouterLink>
         <RouterLink
-          to="/#projects"
+          to="/projects"
           active-class=""
-          :class="{ 'section-link--active': route.path === '/' && activeSection === 'projects' }"
+          :class="{ 'section-link--active': route.path === '/projects' }"
           @click="closeMenu()"
         >
           Projects

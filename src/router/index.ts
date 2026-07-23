@@ -14,6 +14,11 @@ const router = createRouter({
       component: HomeView,
     },
     {
+      path: '/projects',
+      name: 'projects',
+      component: () => import('@/views/ProjectsView.vue'),
+    },
+    {
       path: '/projects/:slug',
       name: 'project-detail',
       component: () => import('@/views/ProjectDetailView.vue'),
@@ -44,6 +49,14 @@ router.afterEach((to) => {
       title: siteConfig.defaultTitle,
       description: siteConfig.defaultDescription,
       robots: 'index, follow',
+    })
+  } else if (to.name === 'projects') {
+    updatePageMeta({
+      title: `專案總覽 — ${siteConfig.siteName}`,
+      description: '收錄已驗證的個人專案與關鍵技術實作。',
+      robots: 'index, follow',
+      ogTitle: `專案總覽 — ${siteConfig.siteName}`,
+      ogDescription: '收錄已驗證的個人專案與關鍵技術實作。',
     })
   } else if (to.name === 'project-detail') {
     const slug = to.params.slug as string

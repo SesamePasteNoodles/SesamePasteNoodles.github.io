@@ -20,7 +20,7 @@ import { profile } from '@/data/profile'
       </p>
 
       <div class="hero-actions">
-        <BaseButton href="#projects" variant="primary">
+        <BaseButton to="/#projects" variant="primary">
           查看精選專案
         </BaseButton>
         <BaseButton :href="profile.githubUrl" external variant="secondary">

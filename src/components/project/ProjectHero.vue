@@ -10,7 +10,7 @@ defineProps<{
 <template>
   <header class="project-hero">
     <nav aria-label="麵包屑導覽" class="project-breadcrumb">
-      <RouterLink to="/" class="back-link">← 回到首頁</RouterLink>
+      <RouterLink to="/projects" class="back-link">← 回到所有專案</RouterLink>
     </nav>
 
     <div class="project-title-group">

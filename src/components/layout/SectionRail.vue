@@ -23,7 +23,7 @@ const activeSection = useActiveSection(['intro', 'projects', 'contact'])
         to="/#projects"
         active-class=""
         :class="{ 'section-link--active': route.path === '/' && activeSection === 'projects' }"
-        aria-label="前往精選專案"
+        aria-label="前往首頁精選專案"
       >
         02
       </RouterLink>
