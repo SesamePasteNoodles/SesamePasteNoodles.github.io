@@ -4,6 +4,7 @@ import { profile } from '@/data/profile'
 import { getProjectsForOverview } from '@/data/projects'
 import ProjectOverviewCard from '@/components/projects/ProjectOverviewCard.vue'
 import BaseButton from '@/components/shared/BaseButton.vue'
+import CopyEmailButton from '@/components/shared/CopyEmailButton.vue'
 
 const overviewProjects = computed(() => getProjectsForOverview())
 </script>
@@ -33,13 +34,11 @@ const overviewProjects = computed(() => getProjectsForOverview())
         <div class="contact-card__content">
           <h2 id="projects-contact-heading" class="contact-title">探索更多或提出合作討論？</h2>
           <p class="contact-copy">
-            歡迎隨時透過 Email 聯絡或至 GitHub 查看公開程式碼庫。
+            歡迎複製 Email 與我聯絡，或至 GitHub 查看公開程式碼庫。
           </p>
         </div>
         <div class="contact-actions">
-          <BaseButton :href="`mailto:${profile.email}`" variant="primary">
-            發送 Email
-          </BaseButton>
+          <CopyEmailButton :email="profile.email" variant="primary" />
           <BaseButton :href="profile.githubUrl" external variant="secondary">
             GitHub
           </BaseButton>

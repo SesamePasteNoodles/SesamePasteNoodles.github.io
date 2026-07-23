@@ -100,6 +100,7 @@ Project Detail
 - Phase 6：已完成部署、正式環境 smoke test 與 Lighthouse 驗收。
 - Projects Bento 總覽與專案主視覺調整：已完成（歷史提交已被全寬橫向卡片列表取代）。
 - Projects 全寬橫向卡片總覽改版：已完成並通過完整驗收。
+- Hero 誠實定位文案與全站 Email 點擊複製：已完成；自動化驗證通過，本機瀏覽器因隔離網路未重跑視覺點擊驗收。
 
 ### Projects 全寬橫向卡片總覽改版（已完成）
 
@@ -201,12 +202,14 @@ Project Detail
 完成內容：
 
 - 移除公開頁面內部的 Approach／ContentPrinciples 原則說明，導覽項目修正為 Intro / Projects / Contact。
-- 精簡 Hero 品牌語彙，移除重複 RC 與內部索引代碼，強化姓名、導讀與「查看精選專案」/ GitHub / Email 入口。
+- 精簡 Hero 品牌語彙，移除重複 RC 與內部索引代碼，強化姓名、導讀與「查看精選專案」/ GitHub / 複製 Email 入口。
+- Hero 導讀改用「還在累積實務經驗的全端工程師」直述目前階段，不以無法驗證的專業包裝取代實際作品。
+- 建立共用 `CopyEmailButton.vue`，將 Hero、Header、Footer 與 Projects CTA 的 `mailto:` 全面改為點擊複製，提供成功／失敗狀態、剪貼簿 API 備援與鍵盤操作。
 - 實作 Section Rail (Desktop) 與 Header (Mobile/Tablet) 二選一 RC 品牌標記顯示策略。
 - 擴充 Project 資料模型 (`featured`, `featuredOrder`, `cardImage`) 與 `getFeaturedProjects()` 人工策展排序。
 - 建立 `FeaturedProjectCard.vue` (支援 primary/secondary 版型、真實圖片與 HAPPET CSS placeholder、技術標籤與 Project Detail CTA)。
 - 建立 `FeaturedProjects.vue` 一主兩副 (HAPPET 主卡 + 石阮售票系統／AI Agent 同步系統副卡) 專案版面，支援 Desktop 雙欄與 Mobile 單欄。
-- 擴充 `scripts/smoke-check.js` 驗證已移除文案與精選專案 Route 識別。
+- 擴充 `scripts/smoke-check.js` 驗證已移除文案、精選專案 Route 識別與正式產物不得包含 `mailto:`。
 
 跨裝置與無障礙驗收紀錄：
 

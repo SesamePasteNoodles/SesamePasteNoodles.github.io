@@ -175,10 +175,21 @@ main,
 }
 
 .header-nav .header-email {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 0.5rem;
   margin-left: 0.5rem;
   border: 1px solid var(--color-primary);
   background: var(--color-primary);
   color: var(--color-ink);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  padding-inline: 0.9rem;
+  text-transform: inherit;
 }
 
 .header-nav .header-email::after {
@@ -360,6 +371,7 @@ main,
   justify-content: space-between;
   gap: 1.5rem;
   border: 1px solid var(--color-primary);
+  cursor: pointer;
   padding: 0 1.1rem;
   font-family: var(--font-mono);
   font-size: 0.875rem;
@@ -442,9 +454,15 @@ main,
   align-items: center;
   gap: 2rem;
   border-bottom: 1px solid var(--color-primary);
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+  background: transparent;
   color: var(--color-primary-strong);
+  cursor: pointer;
   font-family: var(--font-mono);
   font-size: clamp(1rem, 2vw, 1.15rem);
+  padding: 0;
 }
 
 .footer-email:hover {

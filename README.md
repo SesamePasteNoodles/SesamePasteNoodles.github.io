@@ -6,7 +6,7 @@ Designed with **Deep Navy × Modern Bauhaus × Vercel-like Readability**, emphas
 
 - 🔗 **Live Site**: [https://sesamepastenoodles.github.io/](https://sesamepastenoodles.github.io/)
 - 🐙 **GitHub**: [https://github.com/SesamePasteNoodles](https://github.com/SesamePasteNoodles)
-- ✉️ **Email**: [randy861028@gmail.com](mailto:randy861028@gmail.com)
+- ✉️ **Email**: `randy861028@gmail.com`（網站內點擊即可複製）
 
 ---
 

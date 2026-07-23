@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import BaseButton from '@/components/shared/BaseButton.vue'
-import { profile } from '@/data/profile'
+import BaseButton from "@/components/shared/BaseButton.vue";
+import CopyEmailButton from "@/components/shared/CopyEmailButton.vue";
+import { profile } from "@/data/profile";
 </script>
 
 <template>
@@ -16,7 +17,7 @@ import { profile } from '@/data/profile'
       </h1>
 
       <p class="hero-lead">
-        專注於全端 Web 開發、桌面售票系統與 AI Agent 工具鏈建置。本作品集收錄已驗證的個人專案與關鍵技術實作。
+        我是還在累積實務經驗的全端工程師。<br />歡迎瀏覽我實際做過的專案、解決過的問題，以及還在持續學習的內容。
       </p>
 
       <div class="hero-actions">
@@ -26,9 +27,7 @@ import { profile } from '@/data/profile'
         <BaseButton :href="profile.githubUrl" external variant="secondary">
           GitHub
         </BaseButton>
-        <BaseButton :href="`mailto:${profile.email}`" variant="secondary">
-          Email
-        </BaseButton>
+        <CopyEmailButton :email="profile.email" variant="secondary" />
       </div>
     </div>
   </section>

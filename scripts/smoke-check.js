@@ -104,6 +104,7 @@ const removedStrings = [
   '02 / APPROACH',
   'BUILT TO MAKE THE WORK CLEAR.',
   'main-menu.jpg',
+  'mailto:',
 ]
 
 for (const str of removedStrings) {

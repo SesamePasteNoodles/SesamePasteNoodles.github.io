@@ -176,7 +176,7 @@ box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
 ```text
 ┌────────────────────────────────────────────────────────────┐
 │ RC.       About   Skills   Projects   Experience   Contact │
-│                                      GitHub   [Email]       │
+│                                  GitHub   [複製 Email]      │
 ├────────────────────────────────────────────────────────────┤
 │                                                            │
 │  SELECTED WORK                                              │
@@ -253,7 +253,7 @@ box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
 │                                                            │
 │  歡迎聯絡我討論職缺或合作機會。                             │
 │                                                            │
-│  [Email Me]     GitHub                                     │
+│  [複製 Email]   GitHub                                     │
 │                                                            │
 ├────────────────────────────────────────────────────────────┤
 │  © 2026 Randy Chen                          BUILT WITH VUE  │
@@ -296,7 +296,7 @@ Contact
 
 ```text
 GitHub
-Email
+複製 Email
 ```
 
 #### 行為
@@ -327,8 +327,8 @@ Email
 SELECTED WORK
 
 Randy Chen
-[APPROVED PROFESSIONAL TITLE]
-[APPROVED PROFESSIONAL SUMMARY]
+還在累積實務經驗的全端工程師
+歡迎瀏覽我實際做過的專案、解決過的問題，以及還在持續學習的內容。
 ```
 
 CTA：
@@ -336,6 +336,7 @@ CTA：
 ```text
 查看精選作品
 GitHub
+複製 Email
 ```
 
 #### 視覺點綴
@@ -520,11 +521,13 @@ LET'S BUILD SOMETHING RELIABLE.
 
 歡迎聯絡我討論職缺或合作機會。
 
-[Email Me]
+[複製 Email]
 [GitHub]
 ```
 
-避免使用表單，降低維護成本。履歷只有在 `.agents/CONTENT.md` 明確核准後才加入。
+Email 操作直接複製公開信箱至剪貼簿，並提供可見且可被輔助技術讀取的成功／失敗狀態，
+不依賴使用者設定預設郵件應用程式。避免使用表單，降低維護成本。履歷只有在
+`.agents/CONTENT.md` 明確核准後才加入。
 
 ---
 

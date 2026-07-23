@@ -3,6 +3,7 @@ import { nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
 import { useActiveSection } from '@/composables/useActiveSection'
+import CopyEmailButton from '@/components/shared/CopyEmailButton.vue'
 import { profile } from '@/data/profile'
 
 const route = useRoute()
@@ -161,7 +162,12 @@ onBeforeUnmount(() => {
           Contact
         </RouterLink>
         <a :href="profile.githubUrl" target="_blank" rel="noreferrer" @click="closeMenu()">GitHub</a>
-        <a class="header-email" :href="`mailto:${profile.email}`" @click="closeMenu()">Email</a>
+        <CopyEmailButton
+          class="header-email"
+          :email="profile.email"
+          label="複製 Email"
+          @copied="closeMenu()"
+        />
       </nav>
     </div>
   </header>

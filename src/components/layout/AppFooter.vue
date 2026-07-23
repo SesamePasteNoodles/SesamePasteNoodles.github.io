@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import CopyEmailButton from '@/components/shared/CopyEmailButton.vue'
 import { profile } from '@/data/profile'
 </script>
 
@@ -8,10 +9,12 @@ import { profile } from '@/data/profile'
       <p class="footer-kicker">03 / CONTACT</p>
       <div class="footer-callout">
         <p class="footer-title">LET’S START A<br /><span>CONVERSATION.</span></p>
-        <a class="footer-email" :href="`mailto:${profile.email}`">
-          {{ profile.email }}
-          <span aria-hidden="true">↗</span>
-        </a>
+        <CopyEmailButton
+          class="footer-email"
+          :email="profile.email"
+          :label="profile.email"
+          copied-label="Email 已複製"
+        />
       </div>
       <div class="footer-meta">
         <span>© 2026 {{ profile.name }}</span>
