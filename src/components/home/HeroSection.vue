@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import BaseButton from "@/components/shared/BaseButton.vue";
-import { profile } from "@/data/profile";
+import BaseButton from '@/components/shared/BaseButton.vue'
+import { profile } from '@/data/profile'
 </script>
 
 <template>
@@ -8,7 +8,6 @@ import { profile } from "@/data/profile";
     <div class="hero-copy">
       <div class="hero-eyebrow">
         <span>PORTFOLIO / 2026</span>
-        <span>WEB / INTERFACE</span>
       </div>
 
       <h1 id="hero-title">
@@ -16,45 +15,21 @@ import { profile } from "@/data/profile";
         <span class="hero-title-accent">CHEN<span class="hero-dot">.</span></span>
       </h1>
 
+      <p class="hero-lead">
+        專注於全端 Web 開發、桌面售票系統與 AI Agent 工具鏈建置。本作品集收錄已驗證的個人專案與關鍵技術實作。
+      </p>
+
       <div class="hero-actions">
-        <BaseButton :href="`mailto:${profile.email}`">Email</BaseButton>
+        <BaseButton href="#projects" variant="primary">
+          查看精選專案
+        </BaseButton>
         <BaseButton :href="profile.githubUrl" external variant="secondary">
           GitHub
         </BaseButton>
+        <BaseButton :href="`mailto:${profile.email}`" variant="secondary">
+          Email
+        </BaseButton>
       </div>
-    </div>
-
-    <div class="hero-art" aria-label="作品集資訊索引">
-      <div class="signal-panel">
-        <div class="signal-panel__head">
-          <span>PROFILE INDEX</span>
-          <span>RC—01</span>
-        </div>
-        <div class="signal-panel__core" aria-hidden="true">
-          <span class="signal-orbit"></span>
-          <strong>RC</strong>
-        </div>
-        <dl class="signal-panel__list">
-          <div>
-            <dt>01</dt>
-            <dd>PUBLIC PROFILE</dd>
-          </div>
-          <div>
-            <dt>02</dt>
-            <dd>SELECTED WORK</dd>
-          </div>
-          <div>
-            <dt>03</dt>
-            <dd>VERIFIED LINKS</dd>
-          </div>
-        </dl>
-      </div>
-    </div>
-
-    <div class="hero-status">
-      <span>SELECTED WORK</span>
-      <span class="status-line"></span>
-      <span>ONLY VERIFIED CONTENT IS PUBLISHED</span>
     </div>
   </section>
 </template>
