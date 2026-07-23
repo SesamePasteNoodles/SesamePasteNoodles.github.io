@@ -100,51 +100,41 @@ Project Detail
 - Phase 6：已完成部署、正式環境 smoke test 與 Lighthouse 驗收。
 - Projects Bento 總覽與專案主視覺調整：已完成並通過完整驗收。
 
-### Projects Bento 總覽與專案主視覺調整（已完成）
+### Projects Bento 總覽與專案主視覺調整與驗收修正（已完成）
 
-依序完成 7 個可獨立驗收與回退的 commit 階段：
+施工包含「第一輪施工」（7 個 commit 階段）與「驗收缺口修正」（5 個 commit 階段）：
+
+#### 第一輪施工 (Commit `05fcecf` ~ `8c594c9`)
 
 1. `05fcecf` `feat: 建立完整專案總覽路由`
-   - 新增 `ProjectsView.vue` 與 `/#/projects` Hash Route。
-   - 修正 Header Projects 導覽、Hero CTA(`/#projects`) 與 Detail breadcrumb(回到所有專案)。
-   - 設定 Projects 頁面 Metadata。
-
 2. `d5055a8` `feat: 建立 Bento 專案卡片元件`
-   - 建立 `ProjectBentoCard.vue`，支援 `featured` / `standard` 版型與關鍵技術標籤數量。
-   - 實作圖片 fallback 順序 (`cardImage` -> `images[0]` -> accessible placeholder)。
-   - 無圖片專案 (HAPPET) 呈現品牌語彙與具體 `aria-label` 的 placeholder，不繪製虛構 UI。
-
 3. `0732a32` `feat: 完成 Projects Bento 響應式版面`
-   - 於 `ProjectsView.vue` 建立 12 欄 Bento Grid（一大兩小：HAPPET 7欄2列，石阮與 AI Agent 5欄1列）。
-   - 完成 Tablet (主卡全寬、次卡雙欄) 與 Mobile (單欄，順序不變，360px 無水平捲動) 響應式重排。
-   - 預留第四個之後專案自然流入新列的排版機制。
-
 4. `56bed19` `fix: 改用 AI Agent 實際產品畫面`
-   - 以真實 `UI.png` 複製至 `public/projects/ai-agent/ui-main-menu.png`。
-   - 更新 `projects.ts` 圖片資料、alt 及 caption。
-   - 移除已無引用的 `main-menu.jpg`。
-
 5. `3b606e1` `feat: 將專案主視覺提前至詳情首屏`
-   - 建立 `ProjectHeroMedia.vue` 並在 `ProjectHero.vue` 標題摘要後、Metadata 前插入 `#media` slot。
-   - 圖片使用 `loading="eager"` 與 `fetchpriority="high"`，點擊開啟 Modal。
-   - Modal 圖片陣列依 `src` 自動去重，避免上一張／下一張產生重複圖片；Placeholder 不開啟 Modal。
-
 6. `7d87073` `test: 補強 Projects 與主視覺驗收`
-   - 擴充 `scripts/smoke-check.js` 驗證 `/projects` 路由、slugs、`ui-main-menu.png` 存在與舊素材移除。
-   - 自動化驗收命令 `lint`、`type-check`、`build`、`test:smoke`、`git diff --check` 全部 PASS (exit code 0)。
+7. `8c594c9` `docs: 完成 Projects Bento 施工紀錄`
 
-7. 文件同步與清理（本階段）
-   - 同步 `planning.md` 與 `IMPLEMENTATION-PLAN.md` 紀錄。
-   - 刪除 `PROJECTS-BENTO-IMPLEMENTATION-PLAN.md` 臨時計畫檔。
+#### 驗收缺口修正 (Commit `aa644ce` ~ `b42e01d`)
+
+1. `aa644ce` `fix: 修正 Projects Bento 主卡排序`
+   - 實作 `getProjectsForOverview()` 依 `featuredOrder` 排序，將 HAPPET 恢復為大型主卡（跨 7 欄 2 列），不改變首頁精選邏輯。
+2. `2df1466` `fix: 修正 Projects 頁主要內容語意`
+   - 移除 `ProjectsView.vue` 的巢狀 `<main>`，全頁維持 `App.vue` 唯一的 `<main id="main-content">` landmark。
+3. `864b281` `fix: 擴大專案卡片觸控目標`
+   - 為 `.bento-card__cta` 設定 `min-height: 2.75rem` (44px) 及 `min-width: 2.75rem` (44px)，確保觸控目標達規範。
+4. `185dea5` `fix: 提升詳情主視覺載入優先級`
+   - 為 `ProjectHeroMedia.vue` Hero 圖片加入 `fetchpriority="high"`，配合既有 `loading="eager"` 優先載入首屏主視覺。
+5. `b42e01d` `test: 補強 Projects 驗收缺口`
+   - 擴充 `scripts/smoke-check.js` 驗證無巢狀 main、`getProjectsForOverview` 排序使用、Hero `fetchpriority="high"` 及 CTA `44px` 契約。
 
 驗收結果矩陣：
 
-- Desktop (1280×800): 一大兩小 Bento 正確呈現，Detail 首屏標題摘要後立即顯示主視覺。
-- Tablet (768×1024): 主卡全寬，次卡雙欄，導覽與 Modal 正常運作。
-- Mobile (390×844 / 360×800): 單欄排列，互動目標 >= 44px，無非預期水平捲動。
-- 200% Zoom: 標題、卡片與按鈕留白充足無重疊或裁切。
-- Reduced Motion: 停用 hover 放大與動畫位移。
-- 鍵盤與 Modal: 全頁可鍵盤走訪，Focus visible 清晰，Modal 支持 ESC、背景點擊關閉與焦點還原。
+- Desktop (1280×800): HAPPET 為 7 欄×2列大型主卡，石阮與 AI Agent 為右側兩張 5 欄×1列次卡。Detail 首屏標題摘要後立即顯示主視覺。
+- Landmark 語意: 全頁只有一個 `<main>` (`#main-content`)，無巢狀 main。
+- Mobile (390×844 / 360×800): 單欄重排，CTA 實測高度至少 44px，無非預期水平捲動。
+- Hero 載入: 首屏 Hero 圖片同時具備 `loading="eager"` 與 `fetchpriority="high"`，Gallery 圖片維持 `loading="lazy"`。
+- 200% Zoom & Reduced Motion: 文字無重疊裁切，Reduced Motion 停用 hover 位移與縮放。
+- 自動化測試: `npm run lint`, `npm run type-check`, `npm run build`, `npm run test:smoke`, `git diff --check` 全部 PASS (Exit Code 0)。
 
 ### Phase 0：內容盤點與技術基線
 
