@@ -12,13 +12,13 @@ const overviewProjects = computed(() => getProjectsForOverview())
   <div class="projects-page">
     <header class="projects-page__header">
       <p class="mono-label">PORTFOLIO / PROJECTS</p>
-      <h1 class="projects-page__title">所有專案</h1>
+      <h1 id="projects-page-title" class="projects-page__title">所有專案</h1>
       <p class="projects-page__lead">
         收錄已驗證的個人與團隊專案，涵蓋全端 Web 應用、桌面售票系統與 AI Agent 工具鏈。
       </p>
     </header>
 
-    <main class="projects-page__bento-grid" aria-label="專案總覽列表">
+    <section class="projects-page__bento-grid" aria-labelledby="projects-page-title">
       <div
         v-for="(project, index) in overviewProjects"
         :key="project.slug"
@@ -30,7 +30,7 @@ const overviewProjects = computed(() => getProjectsForOverview())
           :size="index === 0 ? 'featured' : 'standard'"
         />
       </div>
-    </main>
+    </section>
 
     <section class="projects-page__contact" aria-labelledby="projects-contact-heading">
       <div class="contact-card">
