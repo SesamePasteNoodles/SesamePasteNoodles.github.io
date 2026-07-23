@@ -266,7 +266,11 @@ const displayedTechs = computed(() => {
 .bento-card__cta {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.375rem;
+  min-height: 2.75rem;
+  min-width: 2.75rem;
+  padding: 0.5rem 0.75rem;
   color: var(--color-primary-strong);
   font-family: var(--font-mono);
   font-size: 0.875rem;
