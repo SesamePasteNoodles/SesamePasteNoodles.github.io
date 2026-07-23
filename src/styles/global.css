@@ -696,6 +696,49 @@ main,
   }
 }
 
+/* Featured Projects Section */
+.featured-section {
+  position: relative;
+  padding: clamp(4rem, 8vw, 7rem) 0;
+  border-top: 1px solid var(--color-border-strong);
+}
+
+.featured-section__container {
+  width: min(100%, var(--page-max));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.featured-section__header {
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+
+.featured-section__title {
+  margin: 0.5rem 0 0 0;
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 0.95;
+}
+
+.featured-grid {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.featured-grid__secondary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+@media (max-width: 900px) {
+  .featured-grid__secondary {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Featured Project Cards */
 .featured-card {
   position: relative;

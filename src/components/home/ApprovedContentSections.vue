@@ -1,17 +1,11 @@
 <script setup lang="ts">
+import FeaturedProjects from '@/components/home/FeaturedProjects.vue'
 import { experienceItems } from '@/data/experience'
-import { projects } from '@/data/projects'
 import { skillGroups } from '@/data/skills'
 </script>
 
 <template>
-  <section v-if="projects.length" id="projects" aria-label="專案">
-    <article v-for="project in projects" :key="project.slug">
-      <RouterLink :to="{ name: 'project-detail', params: { slug: project.slug } }">
-        {{ project.name }}
-      </RouterLink>
-    </article>
-  </section>
+  <FeaturedProjects />
 
   <section v-if="skillGroups.length" id="skills" aria-label="技能">
     <article v-for="group in skillGroups" :key="group.title">
