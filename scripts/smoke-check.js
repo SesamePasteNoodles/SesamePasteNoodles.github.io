@@ -121,15 +121,31 @@ assert(
   'Projects route definition missing from production bundle.',
 )
 
-// 10. Source contract checks for acceptance fix criteria
+// 10. Source contract checks for Projects row layout criteria
 const projectsViewSrc = fs.readFileSync(path.join(srcDir, 'views', 'ProjectsView.vue'), 'utf-8')
 assert(
   !/<main[\s>]/.test(projectsViewSrc),
   'ProjectsView.vue contains nested `<main>` landmark. Only `App.vue` should provide `<main>`.',
 )
 assert(
+  projectsViewSrc.includes('ProjectOverviewCard'),
+  'ProjectsView.vue must use `ProjectOverviewCard` component.',
+)
+assert(
   projectsViewSrc.includes('getProjectsForOverview'),
-  'ProjectsView.vue must use `getProjectsForOverview` to determine Bento grid ordering.',
+  'ProjectsView.vue must use `getProjectsForOverview` to determine project ordering.',
+)
+assert(
+  !projectsViewSrc.includes('grid-row: span 2'),
+  'ProjectsView.vue must not contain Bento `grid-row: span 2` rules.',
+)
+assert(
+  !projectsViewSrc.includes('bento-grid-item--featured'),
+  'ProjectsView.vue must not contain Bento `bento-grid-item--featured` class.',
+)
+assert(
+  !projectsViewSrc.includes('nth-child'),
+  'ProjectsView.vue must not use `nth-child` rules to determine card layout sizes.',
 )
 
 const heroMediaSrc = fs.readFileSync(path.join(srcDir, 'components', 'project', 'ProjectHeroMedia.vue'), 'utf-8')
@@ -138,10 +154,14 @@ assert(
   'ProjectHeroMedia.vue must specify both `loading="eager"` and `fetchpriority="high"` on hero media.',
 )
 
-const bentoCardSrc = fs.readFileSync(path.join(srcDir, 'components', 'projects', 'ProjectBentoCard.vue'), 'utf-8')
+const overviewCardSrc = fs.readFileSync(path.join(srcDir, 'components', 'projects', 'ProjectOverviewCard.vue'), 'utf-8')
 assert(
-  /min-height:\s*2\.75rem/.test(bentoCardSrc) || /min-height:\s*44px/.test(bentoCardSrc),
-  'ProjectBentoCard.vue `.bento-card__cta` must have `min-height: 2.75rem` (44px) or equivalent touch target height.',
+  /min-height:\s*2\.75rem/.test(overviewCardSrc) || /min-height:\s*44px/.test(overviewCardSrc),
+  'ProjectOverviewCard.vue `.project-overview-card__cta` must have `min-height: 2.75rem` (44px) or equivalent touch target height.',
+)
+assert(
+  overviewCardSrc.includes('loading="lazy"'),
+  'ProjectOverviewCard.vue image must use `loading="lazy"`.',
 )
 
 console.log('✅ All Enhanced Production Build Smoke Checks Passed Successfully!')
