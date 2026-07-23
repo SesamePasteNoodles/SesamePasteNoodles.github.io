@@ -97,6 +97,7 @@ export interface Project {
   featured?: boolean
   featuredOrder?: number
   cardImage?: ProjectImage
+  heroImage?: ProjectImage
 }
 
 /**

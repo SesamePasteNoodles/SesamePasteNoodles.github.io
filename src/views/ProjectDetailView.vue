@@ -5,6 +5,7 @@ import { projects } from '@/data/projects'
 import type { ProjectImage } from '@/data/projects'
 
 import ProjectHero from '@/components/project/ProjectHero.vue'
+import ProjectHeroMedia from '@/components/project/ProjectHeroMedia.vue'
 import ProjectSectionRenderer from '@/components/project/ProjectSectionRenderer.vue'
 import ProjectActions from '@/components/project/ProjectActions.vue'
 import ImageModal from '@/components/shared/ImageModal.vue'
@@ -41,7 +42,11 @@ function handleSelectImage(index: number) {
 <template>
   <article class="project-detail-page">
     <template v-if="project">
-      <ProjectHero :project="project" />
+      <ProjectHero :project="project">
+        <template #media>
+          <ProjectHeroMedia :project="project" @open-modal="handleOpenModal" />
+        </template>
+      </ProjectHero>
 
       <!-- Section Renderer for Structured Sections -->
       <ProjectSectionRenderer

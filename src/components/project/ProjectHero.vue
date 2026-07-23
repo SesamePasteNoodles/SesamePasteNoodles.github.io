@@ -21,6 +21,8 @@ defineProps<{
       </p>
     </div>
 
+    <slot name="media" />
+
     <div class="project-meta-bar">
       <div v-if="project.period" class="meta-item">
         <span class="meta-label">DEVELOPMENT PERIOD</span>
