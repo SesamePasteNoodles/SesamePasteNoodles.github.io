@@ -62,11 +62,21 @@ for (const asset of staticAssets) {
   assert(fs.statSync(assetPath).size > 0, `Required static asset \`dist/${asset}\` is empty (0 bytes).`)
 }
 
-// 6. Check projects static image directory in dist/projects/
+// 6. Check projects static image directory & AI Agent real image in dist/projects/
 const projectsDir = path.join(distDir, 'projects')
 assert(fs.existsSync(projectsDir), '`dist/projects` directory is missing.')
-const projectSubdirs = fs.readdirSync(projectsDir)
-assert(projectSubdirs.length > 0, '`dist/projects` directory has no project assets.')
+
+const aiAgentImageInDist = path.join(projectsDir, 'ai-agent', 'ui-main-menu.png')
+assert(
+  fs.existsSync(aiAgentImageInDist) && fs.statSync(aiAgentImageInDist).size > 0,
+  '`dist/projects/ai-agent/ui-main-menu.png` does not exist or is empty (0 bytes).',
+)
+
+const oldAiAgentImageInDist = path.join(projectsDir, 'ai-agent', 'main-menu.jpg')
+assert(
+  !fs.existsSync(oldAiAgentImageInDist),
+  'Old unapproved asset `dist/projects/ai-agent/main-menu.jpg` still exists in dist output.',
+)
 
 // 7. Check JS & CSS bundles in dist/assets
 const assetsDir = path.join(distDir, 'assets')
@@ -92,16 +102,22 @@ const removedStrings = [
   'ONLY VERIFIED CONTENT IS PUBLISHED',
   '02 / APPROACH',
   'BUILT TO MAKE THE WORK CLEAR.',
+  'main-menu.jpg',
 ]
 
 for (const str of removedStrings) {
-  assert(!combinedJsContent.includes(str), `Removed internal string "${str}" found in production JS bundle!`)
+  assert(!combinedJsContent.includes(str), `Removed internal string or asset reference "${str}" found in production JS bundle!`)
 }
 
-// 9. Verify featured project slugs exist in production bundle
+// 9. Verify featured & all project slugs and route exist in production bundle
 const requiredSlugs = ['happet', 'shi-ruan-ticketing-system', 'ai-agent-rules-sync']
 for (const slug of requiredSlugs) {
   assert(combinedJsContent.includes(slug), `Required project slug "${slug}" not found in production JS bundle.`)
 }
+
+assert(
+  combinedJsContent.includes('/projects') || combinedJsContent.includes('projects'),
+  'Projects route definition missing from production bundle.',
+)
 
 console.log('✅ All Enhanced Production Build Smoke Checks Passed Successfully!')
