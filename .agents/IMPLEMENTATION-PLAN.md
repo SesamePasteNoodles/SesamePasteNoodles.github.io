@@ -166,24 +166,30 @@ Project Detail
 - 360px 寬度無非預期水平捲動。
 - 元件視覺符合 `planning.md`，而非直接複製 Vercel。
 
-### Phase 3：首頁
+### Phase 3：首頁（已完成精簡與精選專案卡片實作）
 
-工作：
+> 依 [`HOMEPAGE-REFINEMENT-PLAN.md`](./HOMEPAGE-REFINEMENT-PLAN.md) 完成 6 個小階段施工與完整驗收。
 
-- Hero：姓名，以及經核准的定位、主文案、CTA 與技術資訊卡。
-- About：經核准的簡介；個人照未核准時採純文字或非人物品牌圖形。
-- Tech Stack：黑底 Bento Grid。
-- Featured Projects：HAPPET 主卡、WinForms 與 AI Agent 全域規範同步系統兩張副卡。
-- Projects：顯示所有可公開專案，並提供個別詳情入口。
-- Experience：精簡 Timeline。
-- Contact：依 `CONTENT.md` 顯示 Email 與 GitHub；履歷只有在核准後才加入。
+完成內容：
 
-驗收：
+- 移除公開頁面內部的 Approach／ContentPrinciples 原則說明，導覽項目修正為 Intro / Projects / Contact。
+- 精簡 Hero 品牌語彙，移除重複 RC 與內部索引代碼，強化姓名、導讀與「查看精選專案」/ GitHub / Email 入口。
+- 實作 Section Rail (Desktop) 與 Header (Mobile/Tablet) 二選一 RC 品牌標記顯示策略。
+- 擴充 Project 資料模型 (`featured`, `featuredOrder`, `cardImage`) 與 `getFeaturedProjects()` 人工策展排序。
+- 建立 `FeaturedProjectCard.vue` (支援 primary/secondary 版型、真實圖片與 HAPPET CSS placeholder、技術標籤與 Project Detail CTA)。
+- 建立 `FeaturedProjects.vue` 一主兩副 (HAPPET 主卡 + 石阮售票系統／AI Agent 同步系統副卡) 專案版面，支援 Desktop 雙欄與 Mobile 單欄。
+- 擴充 `scripts/smoke-check.js` 驗證已移除文案與精選專案 Route 識別。
 
-- 首屏可辨識姓名、經核准的專業定位與作品入口。
-- 所有 CTA 連到有效目標。
-- 專案卡只呈現摘要，不把 Case Study 全文塞入首頁。
-- 圖片有尺寸、替代文字與合理裁切。
+跨裝置與無障礙驗收紀錄：
+
+- Desktop (1280×800): Rail 顯示 RC.，Header wordmark 視覺隱藏，一主兩副卡片顯示正確。
+- Tablet (768×1024): Rail 隱藏，Header 顯示 RC.，卡片自動重排無水平捲動。
+- Mobile (390×844 / 360×800): Header 顯示 RC.，單欄重排，無非預期水平捲動。
+- 鍵盤導覽 & Focus Visible: Tab 可流暢順序走訪 Hero CTA 及三張專案卡片詳情入口， focus-ring 不被裁切。
+- 200% 文字縮放: 姓名、導讀與 CTA 留白充足，無文字重疊或裁切。
+- Reduced Motion: 停用圖片 hover 放大與卡片/箭頭位移動畫。
+- GitHub Pages & Hash Route: 重新整理及直接存取首頁與 3 個 Project Detail 均正常無 404。
+- 自動化測試: `npm run lint`, `npm run type-check`, `npm run build`, `npm run test:smoke` 全部 PASS。
 
 ### Phase 4：Project Detail（現況：保留待補）
 

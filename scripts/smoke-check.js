@@ -73,10 +73,35 @@ const assetsDir = path.join(distDir, 'assets')
 assert(fs.existsSync(assetsDir), '`dist/assets` directory does not exist.')
 
 const assetFiles = fs.readdirSync(assetsDir)
-const hasJs = assetFiles.some((f) => f.endsWith('.js') && fs.statSync(path.join(assetsDir, f)).size > 0)
+const jsFiles = assetFiles.filter((f) => f.endsWith('.js') && fs.statSync(path.join(assetsDir, f)).size > 0)
 const hasCss = assetFiles.some((f) => f.endsWith('.css') && fs.statSync(path.join(assetsDir, f)).size > 0)
 
-assert(hasJs, 'No valid non-empty JavaScript bundle found in `dist/assets`.')
+assert(jsFiles.length > 0, 'No valid non-empty JavaScript bundle found in `dist/assets`.')
 assert(hasCss, 'No valid non-empty CSS bundle found in `dist/assets`.')
+
+// 8. Verify removed copy is not in dist JS bundles
+const combinedJsContent = jsFiles
+  .map((f) => fs.readFileSync(path.join(assetsDir, f), 'utf-8'))
+  .join('\n')
+
+const removedStrings = [
+  'PROFILE INDEX',
+  'RC—01',
+  'PUBLIC PROFILE',
+  'VERIFIED LINKS',
+  'ONLY VERIFIED CONTENT IS PUBLISHED',
+  '02 / APPROACH',
+  'BUILT TO MAKE THE WORK CLEAR.',
+]
+
+for (const str of removedStrings) {
+  assert(!combinedJsContent.includes(str), `Removed internal string "${str}" found in production JS bundle!`)
+}
+
+// 9. Verify featured project slugs exist in production bundle
+const requiredSlugs = ['happet', 'shi-ruan-ticketing-system', 'ai-agent-rules-sync']
+for (const slug of requiredSlugs) {
+  assert(combinedJsContent.includes(slug), `Required project slug "${slug}" not found in production JS bundle.`)
+}
 
 console.log('✅ All Enhanced Production Build Smoke Checks Passed Successfully!')
