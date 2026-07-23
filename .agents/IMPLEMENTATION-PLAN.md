@@ -98,42 +98,33 @@ Project Detail
 - Phase 4：大部分實作已完成；HAPPET 個人角色、團隊規模與個人貢獻因尚未取得公開授權，保留待補。
 - Phase 5：已完成並通過人工驗收。
 - Phase 6：已完成部署、正式環境 smoke test 與 Lighthouse 驗收。
-- Projects Bento 總覽與專案主視覺調整：已完成並通過完整驗收。
+- Projects Bento 總覽與專案主視覺調整：已完成（歷史提交已被全寬橫向卡片列表取代）。
+- Projects 全寬橫向卡片總覽改版：已完成並通過完整驗收。
 
-### Projects Bento 總覽與專案主視覺調整與驗收修正（已完成）
+### Projects 全寬橫向卡片總覽改版（已完成）
 
-施工包含「第一輪施工」（7 個 commit 階段）與「驗收缺口修正」（5 個 commit 階段）：
+施工包含 4 個獨立 commit 階段：
 
-#### 第一輪施工 (Commit `05fcecf` ~ `8c594c9`)
+1. `ff707b6` `refactor: 建立橫向專案總覽卡片`
+   - 新增全寬橫向 `ProjectOverviewCard.vue` 元件，支援 Desktop 橫向（圖片在左、內容在右）與 Tablet/Mobile 垂直版型。
+   - 實作 `cardImage -> images[0] -> accessible placeholder` 圖片 fallback，上限顯示 6 個關鍵技術標籤。
+2. `b8a49a8` `refactor: 將 Projects 改為全寬卡片列表`
+   - `ProjectsView.vue` 改用 `ProjectOverviewCard.vue` 呈現單欄專案列表。
+   - 移除 `index === 0`、`bento-grid-item--featured`、`grid-row: span 2` 及 `:nth-child` 等跨欄跨列跨度規則。
+   - 刪除過時的 `ProjectBentoCard.vue` 元件，保留 `getProjectsForOverview()` 排序與單一 `<main>` 語意。
+3. `e2a2067` `test: 補強 Projects 橫向列表驗收`
+   - 更新 `scripts/smoke-check.js` 驗證 `ProjectOverviewCard` 元件使用、`getProjectsForOverview()` 排序、無巢狀 main、無 Bento 特殊 CSS 規則與 CTA 44px 觸控範圍契約。
+4. 文件同步與清理（本階段）
 
-1. `05fcecf` `feat: 建立完整專案總覽路由`
-2. `d5055a8` `feat: 建立 Bento 專案卡片元件`
-3. `0732a32` `feat: 完成 Projects Bento 響應式版面`
-4. `56bed19` `fix: 改用 AI Agent 實際產品畫面`
-5. `3b606e1` `feat: 將專案主視覺提前至詳情首屏`
-6. `7d87073` `test: 補強 Projects 與主視覺驗收`
-7. `8c594c9` `docs: 完成 Projects Bento 施工紀錄`
-
-#### 驗收缺口修正 (Commit `aa644ce` ~ `b42e01d`)
-
-1. `aa644ce` `fix: 修正 Projects Bento 主卡排序`
-   - 實作 `getProjectsForOverview()` 依 `featuredOrder` 排序，將 HAPPET 恢復為大型主卡（跨 7 欄 2 列），不改變首頁精選邏輯。
-2. `2df1466` `fix: 修正 Projects 頁主要內容語意`
-   - 移除 `ProjectsView.vue` 的巢狀 `<main>`，全頁維持 `App.vue` 唯一的 `<main id="main-content">` landmark。
-3. `864b281` `fix: 擴大專案卡片觸控目標`
-   - 為 `.bento-card__cta` 設定 `min-height: 2.75rem` (44px) 及 `min-width: 2.75rem` (44px)，確保觸控目標達規範。
-4. `185dea5` `fix: 提升詳情主視覺載入優先級`
-   - 為 `ProjectHeroMedia.vue` Hero 圖片加入 `fetchpriority="high"`，配合既有 `loading="eager"` 優先載入首屏主視覺。
-5. `b42e01d` `test: 補強 Projects 驗收缺口`
-   - 擴充 `scripts/smoke-check.js` 驗證無巢狀 main、`getProjectsForOverview` 排序使用、Hero `fetchpriority="high"` 及 CTA `44px` 契約。
+#### 歷史提交紀錄 (Bento 第一輪與補強)
+- 第一輪: `05fcecf` ~ `8c594c9` (建立 Bento 專案卡與路由)
+- 補強修正: `aa644ce` ~ `2c6f633` (修正主卡排序、巢狀 main、CTA 44px 與 fetchpriority)
 
 驗收結果矩陣：
-
-- Desktop (1280×800): HAPPET 為 7 欄×2列大型主卡，石阮與 AI Agent 為右側兩張 5 欄×1列次卡。Detail 首屏標題摘要後立即顯示主視覺。
-- Landmark 語意: 全頁只有一個 `<main>` (`#main-content`)，無巢狀 main。
-- Mobile (390×844 / 360×800): 單欄重排，CTA 實測高度至少 44px，無非預期水平捲動。
-- Hero 載入: 首屏 Hero 圖片同時具備 `loading="eager"` 與 `fetchpriority="high"`，Gallery 圖片維持 `loading="lazy"`。
-- 200% Zoom & Reduced Motion: 文字無重疊裁切，Reduced Motion 停用 hover 位移與縮放。
+- Desktop (1280×800): 每張專案卡片均為全寬橫向排列，圖片在左（寬度約 52%–60%，`object-fit: contain`），內容在右。HAPPET 卡片高度合理，不再出現 1159px 巨量空白。
+- Tablet (768×1024) & Mobile (390×844 / 360×800): 圖片在上、內容在下，單欄滿寬，無非預期水平捲動，CTA 高度達標 (>= 44px)。
+- 未來擴充性: 新增第四個專案自然增加第四列，不需變更特定 CSS 或 `index` 邏輯。
+- 首頁與 Detail 回歸: 首頁精選專案一主兩副維持原樣；Detail 首屏 Hero 圖片 `loading="eager"` 與 `fetchpriority="high"` 運作正常，Modal 焦點還原正常。
 - 自動化測試: `npm run lint`, `npm run type-check`, `npm run build`, `npm run test:smoke`, `git diff --check` 全部 PASS (Exit Code 0)。
 
 ### Phase 0：內容盤點與技術基線
