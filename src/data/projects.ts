@@ -94,6 +94,9 @@ export interface Project {
   demoUrl?: string
   images?: ProjectImage[]
   sections?: ProjectSection[]
+  featured?: boolean
+  featuredOrder?: number
+  cardImage?: ProjectImage
 }
 
 /**
@@ -104,6 +107,8 @@ export const projects: Project[] = [
   {
     slug: 'shi-ruan-ticketing-system',
     name: '石阮售票系統',
+    featured: true,
+    featuredOrder: 2,
     summary:
       '基於 C# WinForms 與 SQL Server／Dapper 開發的桌面端售票系統，實作動態座位圖、連續座位檢核，以及 60 秒鎖單與逾時自動釋放流程。',
     status: '核心購票流程完成／個人獨立開發',
@@ -247,6 +252,8 @@ export const projects: Project[] = [
   {
     slug: 'happet',
     name: 'HAPPET',
+    featured: true,
+    featuredOrder: 1,
     summary:
       '寵物照護媒合平台，整合會員驗證、照護媒合、寵物醫療紀錄、站內錢包與第三方付款流程。',
     status: '開發紀錄已核對；正式發布狀態待確認',
@@ -375,6 +382,8 @@ export const projects: Project[] = [
   {
     slug: 'ai-agent-rules-sync',
     name: 'AI Agent 全域規範同步系統',
+    featured: true,
+    featuredOrder: 3,
     summary:
       '以 PowerShell 集中建置、驗證、備份並安全同步 Codex 與 Antigravity 全域規範的管理工具。',
     status: '功能完成／可使用；正式發布狀態待確認',
@@ -490,3 +499,9 @@ export const projects: Project[] = [
     ],
   },
 ]
+
+export function getFeaturedProjects(): Project[] {
+  return projects
+    .filter((p) => p.featured)
+    .sort((a, b) => (a.featuredOrder ?? Infinity) - (b.featuredOrder ?? Infinity))
+}
