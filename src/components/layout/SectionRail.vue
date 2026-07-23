@@ -4,7 +4,7 @@ import { useRoute } from 'vue-router'
 import { useActiveSection } from '@/composables/useActiveSection'
 
 const route = useRoute()
-const activeSection = useActiveSection(['intro', 'approach', 'contact'])
+const activeSection = useActiveSection(['intro', 'projects', 'contact'])
 </script>
 
 <template>
@@ -20,10 +20,10 @@ const activeSection = useActiveSection(['intro', 'approach', 'contact'])
         01
       </RouterLink>
       <RouterLink
-        to="/#approach"
+        to="/#projects"
         active-class=""
-        :class="{ 'section-link--active': route.path === '/' && activeSection === 'approach' }"
-        aria-label="前往作品呈現原則"
+        :class="{ 'section-link--active': route.path === '/' && activeSection === 'projects' }"
+        aria-label="前往精選專案"
       >
         02
       </RouterLink>

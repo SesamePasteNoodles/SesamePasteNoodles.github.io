@@ -7,7 +7,7 @@ import { profile } from '@/data/profile'
 
 const route = useRoute()
 const isOpen = ref(false)
-const activeSection = useActiveSection(['intro', 'approach', 'contact'])
+const activeSection = useActiveSection(['intro', 'projects', 'contact'])
 
 const menuButtonRef = ref<HTMLButtonElement | null>(null)
 const navRef = ref<HTMLElement | null>(null)
@@ -145,12 +145,12 @@ onBeforeUnmount(() => {
           Intro
         </RouterLink>
         <RouterLink
-          to="/#approach"
+          to="/#projects"
           active-class=""
-          :class="{ 'section-link--active': route.path === '/' && activeSection === 'approach' }"
+          :class="{ 'section-link--active': route.path === '/' && activeSection === 'projects' }"
           @click="closeMenu()"
         >
-          Approach
+          Projects
         </RouterLink>
         <RouterLink
           to="/#contact"
