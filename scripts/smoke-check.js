@@ -4,6 +4,7 @@ import path from 'node:path'
 import process from 'node:process'
 
 const distDir = path.resolve(process.cwd(), 'dist')
+const srcDir = path.resolve(process.cwd(), 'src')
 
 function assert(condition, message) {
   if (!condition) {
@@ -118,6 +119,29 @@ for (const slug of requiredSlugs) {
 assert(
   combinedJsContent.includes('/projects') || combinedJsContent.includes('projects'),
   'Projects route definition missing from production bundle.',
+)
+
+// 10. Source contract checks for acceptance fix criteria
+const projectsViewSrc = fs.readFileSync(path.join(srcDir, 'views', 'ProjectsView.vue'), 'utf-8')
+assert(
+  !/<main[\s>]/.test(projectsViewSrc),
+  'ProjectsView.vue contains nested `<main>` landmark. Only `App.vue` should provide `<main>`.',
+)
+assert(
+  projectsViewSrc.includes('getProjectsForOverview'),
+  'ProjectsView.vue must use `getProjectsForOverview` to determine Bento grid ordering.',
+)
+
+const heroMediaSrc = fs.readFileSync(path.join(srcDir, 'components', 'project', 'ProjectHeroMedia.vue'), 'utf-8')
+assert(
+  heroMediaSrc.includes('loading="eager"') && heroMediaSrc.includes('fetchpriority="high"'),
+  'ProjectHeroMedia.vue must specify both `loading="eager"` and `fetchpriority="high"` on hero media.',
+)
+
+const bentoCardSrc = fs.readFileSync(path.join(srcDir, 'components', 'projects', 'ProjectBentoCard.vue'), 'utf-8')
+assert(
+  /min-height:\s*2\.75rem/.test(bentoCardSrc) || /min-height:\s*44px/.test(bentoCardSrc),
+  'ProjectBentoCard.vue `.bento-card__cta` must have `min-height: 2.75rem` (44px) or equivalent touch target height.',
 )
 
 console.log('✅ All Enhanced Production Build Smoke Checks Passed Successfully!')
