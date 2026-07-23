@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import { profile } from '@/data/profile'
 import { getProjectsForOverview } from '@/data/projects'
-import ProjectBentoCard from '@/components/projects/ProjectBentoCard.vue'
+import ProjectOverviewCard from '@/components/projects/ProjectOverviewCard.vue'
 import BaseButton from '@/components/shared/BaseButton.vue'
 
 const overviewProjects = computed(() => getProjectsForOverview())
@@ -18,17 +18,13 @@ const overviewProjects = computed(() => getProjectsForOverview())
       </p>
     </header>
 
-    <section class="projects-page__bento-grid" aria-labelledby="projects-page-title">
+    <section class="projects-page__list" aria-labelledby="projects-page-title">
       <div
-        v-for="(project, index) in overviewProjects"
+        v-for="project in overviewProjects"
         :key="project.slug"
-        class="bento-grid-item"
-        :class="{ 'bento-grid-item--featured': index === 0 }"
+        class="projects-list-item"
       >
-        <ProjectBentoCard
-          :project="project"
-          :size="index === 0 ? 'featured' : 'standard'"
-        />
+        <ProjectOverviewCard :project="project" />
       </div>
     </section>
 
@@ -80,26 +76,16 @@ const overviewProjects = computed(() => getProjectsForOverview())
   line-height: 1.7;
 }
 
-/* Bento Grid */
-.projects-page__bento-grid {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 1.5rem;
+/* Projects Row List */
+.projects-page__list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
   margin-bottom: 4rem;
 }
 
-.bento-grid-item {
-  grid-column: span 6;
-}
-
-.bento-grid-item--featured {
-  grid-column: span 7;
-  grid-row: span 2;
-}
-
-.bento-grid-item:nth-child(2),
-.bento-grid-item:nth-child(3) {
-  grid-column: span 5;
+.projects-list-item {
+  width: 100%;
 }
 
 /* Contact section */
@@ -144,28 +130,6 @@ const overviewProjects = computed(() => getProjectsForOverview())
 }
 
 /* Responsive adjustments */
-@media (max-width: 63.9375rem) {
-  .projects-page__bento-grid {
-    grid-template-columns: repeat(12, 1fr);
-    gap: 1.25rem;
-  }
-
-  .bento-grid-item {
-    grid-column: span 6;
-    grid-row: auto;
-  }
-
-  .bento-grid-item--featured {
-    grid-column: span 12;
-    grid-row: auto;
-  }
-
-  .bento-grid-item:nth-child(2),
-  .bento-grid-item:nth-child(3) {
-    grid-column: span 6;
-  }
-}
-
 @media (max-width: 47.9375rem) {
   .projects-page {
     padding-top: 1.5rem;
@@ -176,19 +140,9 @@ const overviewProjects = computed(() => getProjectsForOverview())
     margin-bottom: 2rem;
   }
 
-  .projects-page__bento-grid {
-    display: flex;
-    flex-direction: column;
+  .projects-page__list {
     gap: 1.25rem;
     margin-bottom: 3rem;
-  }
-
-  .bento-grid-item,
-  .bento-grid-item--featured,
-  .bento-grid-item:nth-child(2),
-  .bento-grid-item:nth-child(3) {
-    grid-column: auto;
-    width: 100%;
   }
 
   .contact-card {
