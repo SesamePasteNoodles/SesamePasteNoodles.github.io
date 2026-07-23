@@ -52,6 +52,7 @@ function handleImageClick(event: MouseEvent) {
           :alt="heroImage.alt"
           class="hero-media-img"
           loading="eager"
+          fetchpriority="high"
           decoding="async"
         />
       </button>
