@@ -299,12 +299,99 @@ main,
 .hero-copy {
   position: relative;
   z-index: 1;
-  display: flex;
+  display: grid;
   width: min(100%, var(--page-max));
-  flex-direction: column;
-  justify-content: center;
+  grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.85fr);
+  align-items: center;
+  gap: clamp(2rem, 4vw, 3.5rem);
   margin-inline: auto;
   padding: clamp(3.5rem, 7vw, 6rem) var(--gutter) 2.5rem;
+}
+
+.hero-main {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-skills {
+  width: 100%;
+  max-width: 460px;
+  margin-left: auto;
+  border: 1px solid var(--color-border);
+  background: rgb(5 8 13 / 0.88);
+  box-shadow: var(--shadow-card);
+}
+
+.hero-skills-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-border);
+  background: rgb(8 16 28 / 0.7);
+  padding: 0.85rem 1.25rem;
+}
+
+.hero-skills-header h2 {
+  margin: 0;
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-skills-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hero-skills-item {
+  padding: 0.95rem 1.25rem;
+}
+
+.hero-skills-item:not(:last-child) {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.hero-skills-category {
+  margin: 0 0 0.3rem;
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.hero-skills-num {
+  color: var(--color-primary);
+}
+
+.hero-skills-tech {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  margin: 0;
+  padding: 0;
+  color: var(--color-text-secondary);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  list-style: none;
+  word-break: break-word;
+}
+
+.hero-skills-tech li {
+  display: inline-flex;
+  align-items: baseline;
+  white-space: nowrap;
+}
+
+.hero-skills-tech li:not(:last-child)::after {
+  margin-inline: 0.4rem;
+  color: var(--color-text-muted);
+  content: "·";
 }
 
 .hero-eyebrow,
@@ -612,25 +699,17 @@ main,
     display: none;
   }
 
-  .hero {
-    grid-template-columns: 1fr;
-  }
-
   .hero-copy {
-    min-height: 70svh;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    min-height: auto;
   }
 
-  .hero-art {
-    min-height: 560px;
-    border-top: 1px solid var(--color-border);
-    border-left: 0;
+  .hero-skills {
+    max-width: 100%;
+    margin-left: 0;
   }
-
-  .hero-status {
-    grid-column: 1;
-  }
-
-
 }
 
 @media (max-width: 760px) {

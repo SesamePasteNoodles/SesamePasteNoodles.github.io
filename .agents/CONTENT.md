@@ -75,6 +75,18 @@ The online demo, production deployment, and outcome metrics remain unprovided.
 The project role, team size, repository URL, demo, release status, real-world usage,
 and outcome metrics remain unpublished until explicitly confirmed.
 
+## Approved skill set
+
+The following five skill categories and normalized technology names are approved for publication in the Hero section:
+
+- FRONTEND: Vue 3, Bootstrap, Pinia, Axios
+- BACKEND: ASP.NET Core, EF Core, ADO.NET, Dapper
+- DATABASE: Microsoft SQL Server
+- VERSION CONTROL: Git, GitHub
+- API TESTING: Postman, Swagger
+
+No unapproved skills, proficiency ratings, percentages, progress bars, or other unverified personal details are permitted.
+
 ## Privacy
 
 Personal information not listed in this document is private by default.

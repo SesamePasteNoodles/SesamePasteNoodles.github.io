@@ -190,4 +190,106 @@ assert(
   'ProjectOverviewCard.vue image must use `loading="lazy"`.',
 )
 
+// 11. Contract checks for Hero Skill Set feature
+const skillsDataSrc = fs.readFileSync(path.join(srcDir, 'data', 'skills.ts'), 'utf-8')
+const approvedCategories = ['FRONTEND', 'BACKEND', 'DATABASE', 'VERSION CONTROL', 'API TESTING']
+for (const cat of approvedCategories) {
+  assert(skillsDataSrc.includes(cat), `skills.ts must include approved category '${cat}'.`)
+}
+const approvedSkillItems = [
+  'Vue 3',
+  'Bootstrap',
+  'Pinia',
+  'Axios',
+  'ASP.NET Core',
+  'EF Core',
+  'ADO.NET',
+  'Dapper',
+  'Microsoft SQL Server',
+  'Git',
+  'GitHub',
+  'Postman',
+  'Swagger',
+]
+for (const skill of approvedSkillItems) {
+  assert(skillsDataSrc.includes(skill), `skills.ts must include approved skill '${skill}'.`)
+}
+
+const heroSectionSrc = fs.readFileSync(path.join(srcDir, 'components', 'home', 'HeroSection.vue'), 'utf-8')
+assert(
+  heroSectionSrc.includes("import { skillGroups } from '@/data/skills'") ||
+    heroSectionSrc.includes('import { skillGroups } from "@/data/skills"'),
+  'HeroSection.vue must import `skillGroups` from `@/data/skills`.',
+)
+assert(
+  heroSectionSrc.includes('hero-skills'),
+  'HeroSection.vue must include `.hero-skills` element for displaying Skill Set.',
+)
+assert(
+  !heroSectionSrc.includes('hero-skills-count') && !heroSectionSrc.includes('01—05'),
+  'HeroSection.vue must not display a decorative total range beside the Skill Set title.',
+)
+assert(
+  heroSectionSrc.includes('class="hero-skills-tech"') &&
+    heroSectionSrc.includes('v-for="skill in group.items"'),
+  'HeroSection.vue must render approved skills as a semantic list.',
+)
+
+const approvedSectionsSrc = fs.readFileSync(path.join(srcDir, 'components', 'home', 'ApprovedContentSections.vue'), 'utf-8')
+assert(
+  !approvedSectionsSrc.includes('id="skills"'),
+  'ApprovedContentSections.vue must not duplicate the skills section (`id="skills"`).',
+)
+assert(
+  !approvedSectionsSrc.includes('skillGroups'),
+  'ApprovedContentSections.vue must not import or render `skillGroups`.',
+)
+
+// Ensure no unapproved proficiency expressions exist across Hero components.
+const forbiddenProficiencyPatterns = [
+  /%/,
+  /aria-valuenow/i,
+  /<progress\b/i,
+  /\bprogress\b/i,
+  /(?:progress|skill)-bar/i,
+  /\bratings?\b/i,
+  /\bstars?\b/i,
+  /熟練度/,
+  /星等/,
+  /進度條/,
+]
+for (const pattern of forbiddenProficiencyPatterns) {
+  assert(
+    !pattern.test(heroSectionSrc),
+    `HeroSection.vue must not contain unapproved proficiency metric pattern ${pattern}.`,
+  )
+}
+
+const globalCssSrc = fs.readFileSync(path.join(srcDir, 'styles', 'global.css'), 'utf-8')
+const heroSkillMinFontSelectors = [
+  '.hero-skills-header h2',
+  '.hero-skills-category',
+]
+for (const selector of heroSkillMinFontSelectors) {
+  const escapedSelector = selector.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  const rule = globalCssSrc.match(new RegExp(`${escapedSelector}\\s*\\{([^}]*)\\}`))
+  assert(rule, `global.css must define '${selector}'.`)
+  const fontSize = rule[1].match(/font-size:\s*([\d.]+)(rem|px)/)
+  assert(fontSize, `global.css '${selector}' must define a rem or px font size.`)
+  const fontSizeInPixels = Number(fontSize[1]) * (fontSize[2] === 'rem' ? 16 : 1)
+  assert(
+    fontSizeInPixels >= 14,
+    `global.css '${selector}' must use a font size of at least 14px.`,
+  )
+}
+
+const skillSeparatorRule = globalCssSrc.match(
+  /\.hero-skills-tech li:not\(:last-child\)::after\s*\{([^}]*)\}/,
+)
+assert(skillSeparatorRule, 'global.css must define the Hero Skill Set separator.')
+assert(
+  /margin-inline:\s*0\.4rem/.test(skillSeparatorRule[1]),
+  'Hero Skill Set separators must use the approved expanded inline spacing.',
+)
+
 console.log('✅ All Enhanced Production Build Smoke Checks Passed Successfully!')
