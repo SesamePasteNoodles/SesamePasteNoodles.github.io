@@ -92,15 +92,16 @@ Project Detail
 
 ## 6. 施工階段
 
-目前狀態（2026-07-23）：
+目前狀態（2026-07-28）：
 
 - Phase 0–3：已完成。
-- Phase 4：大部分實作已完成；HAPPET 個人角色、團隊規模與個人貢獻因尚未取得公開授權，保留待補。
+- Phase 4：驗收修訂完成（包含 HAPPET 專案詳情、全平台摘要、真實圖片、白名單、360px 溢出修復與 Case Study 修辭客觀化）。
 - Phase 5：已完成並通過人工驗收。
 - Phase 6：已完成部署、正式環境 smoke test 與 Lighthouse 驗收。
 - Projects Bento 總覽與專案主視覺調整：已完成（歷史提交已被全寬橫向卡片列表取代）。
 - Projects 全寬橫向卡片總覽改版：已完成並通過完整驗收。
-- Hero 誠實定位文案與全站 Email 點擊複製：已完成；自動化驗證通過，本機瀏覽器因隔離網路未重跑視覺點擊驗收。
+- Hero 誠實定位文案與全站 Email 點擊複製：已完成；自動化驗證通過。
+- HAPPET 資訊與 Case Study 更新：驗收修訂完成（公開展示版、五人團隊、全平台摘要、個人貢獻、真實圖片與 360px 溢出修復）。
 
 ### Projects 全寬橫向卡片總覽改版（已完成）
 
@@ -222,27 +223,24 @@ Project Detail
 - GitHub Pages & Hash Route: 重新整理及直接存取首頁與 3 個 Project Detail 均正常無 404。
 - 自動化測試: `npm run lint`, `npm run type-check`, `npm run build`, `npm run test:smoke` 全部 PASS。
 
-### Phase 4：Project Detail（現況：保留待補）
+### Phase 4：Project Detail（現況：驗收修訂完成）
 
 工作：
 
 - 建立共用 Project Hero、Overview、Technical Highlight 和 Gallery。
 - 建立依 `sections[].type` 呈現的受控內容區塊，允許排序及圖文版型切換。
 - 完成 HAPPET 的問題、設計、原因、結果敘事。
-- 加入架構圖、流程圖、截圖與可存取的 Image Modal。
+- 加入架構圖、流程圖、真實截圖與可存取的 Image Modal。
 - 補齊 WinForms 個人小專案與 AI Agent 全域規範同步系統的精簡詳情頁。
 
 驗收：
 
-- HAPPET 清楚區分團隊成果與個人貢獻。
+- HAPPET 清楚區分五人團隊成果與 Randy Chen 的個人貢獻。
 - 每項技術亮點能說明取捨，不只列出工具名稱。
 - 圖片 Modal 支援 ESC、背景關閉、焦點管理與鍵盤切換。
-- 多圖區塊中的每張圖片都有獨立替代文字與可選圖說，Desktop、Tablet、Mobile
-  均依受控版型正確重排。
+- 多圖區塊中的每張圖片都有獨立替代文字與可選圖說，Desktop、Tablet、Mobile 均依受控版型正確重排。
 - 直接開啟或重新整理 Hash Route 不出現 404。
-- 已完成範圍：共用詳情元件、受控內容區塊、三個專案詳情、Image Modal，以及相關 lint、type-check 與 production build。
-- 保留原因：HAPPET 個人角色、團隊規模與個人貢獻尚未取得 `CONTENT.md` 白名單授權，無法完成「區分團隊成果與個人貢獻」的內容驗收。
-- 恢復條件：取得上述內容核准後，補齊 HAPPET Case Study，重新執行內容、互動與跨裝置驗收，再標記 Phase 4 完成。
+- 已完成範圍：共用詳情元件、受控內容區塊、三個專案詳情、Image Modal、HAPPET 公開白名單、全平台團隊摘要、RELEASE DATE、九張未修改的真實系統截圖 (`01-my-wallet.png` 至 `09-marketplace-home.png`)、360px/390px 零溢出修復、客觀技術敘述與受控 Smoke Check。
 
 ### Phase 5：RWD、互動與無障礙（現況：已完成）
 
@@ -360,9 +358,8 @@ npm run build
 
 ## 10. 下一個執行點
 
-目前 Phase 0–3、Phase 5 與 Phase 6 已完成；後續依下列順序處理：
+目前 Phase 0–6 已全數完成（包含 HAPPET 專案詳情、真實圖片、白名單與 Case Study 補齊）；後續依下列順序處理：
 
-1. 取得 HAPPET 個人角色、團隊規模與個人貢獻的公開授權後，恢復 Phase 4 並完成內容與跨裝置驗收。
-2. Phase 4 完成後，依第 9 節執行一次全站 Definition of Done 複核。
-3. 僅在 Phase 7 的導入條件成立並經使用者確認後，才開始 Git-backed CMS 實作。
-4. 若 Phase 7 導入條件尚未成立，維持現有資料模組與 GitHub Pages 部署流程，不新增後續 Phase。
+1. 依第 9 節執行全站 Definition of Done 複核。
+2. 僅在 Phase 7 的導入條件成立並經使用者確認後，才開始 Git-backed CMS 實作。
+3. 若 Phase 7 導入條件尚未成立，維持現有資料模組與 GitHub Pages 部署流程，不新增後續 Phase。

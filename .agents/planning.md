@@ -491,7 +491,7 @@ RESTful API、身分驗證與交易流程實作。
 
 - `/#/projects` 顯示所有可公開專案，採用全寬橫向卡片列表（Desktop 圖片在左、內容在右；Tablet/Mobile 圖片在上、內容在下），初期不因只有三個專案而加入多餘篩選器，新增專案時自然增加新列擴充。
 - `/#/projects/:slug` 顯示個別 Project Detail／Case Study，主視覺於標題與摘要之後、Metadata 前立即呈現。
-- 無公開圖片的專案（如 HAPPET）採用具品牌語彙且可存取的 placeholder，不繪製虛構介面。
+- 未來若有無公開圖片的專案，採用具品牌語彙且可存取的 placeholder，不繪製虛構介面；HAPPET 已全面使用核准公開之真實操作圖片。
 - 專案數量超過約 9～12 個時，再依實際內容評估分類、篩選或分頁。
 - 新增專案預設進入完整 Projects 頁；是否進入首頁由人工策展決定。
 
@@ -542,7 +542,7 @@ Email 操作直接複製公開信箱至剪貼簿，並提供可見且可被輔�
 │  [APPROVED PROJECT SUMMARY]                                 │
 │                                                            │
 │  ROLE              TEAM             YEAR                    │
-│  [TO CONFIRM]      [TO CONFIRM]     [TO CONFIRM]            │
+│  [APPROVED ROLE]   5-Person Team    2026.06–2026.07         │
 │                                                            │
 │  [APPROVED TECH STACK]                                      │
 ├────────────────────────────────────────────────────────────┤
@@ -844,9 +844,7 @@ Router 或既有部署流程。登入與 Repository 寫入憑證不得存入前�
 
 本節只保留階段摘要；詳細任務與驗收條件見 `IMPLEMENTATION-PLAN.md`。
 
-目前狀態（2026-07-23）：Phase 0–3、Phase 5 與 Phase 6 已完成；Phase 4 因 HAPPET
-個人角色、團隊規模與個人貢獻尚未取得公開授權而保留待補；Phase 7 為需求成立時才導入的
-條件式階段。目前 roadmap 規劃至 Phase 7，未規劃 Phase 8。
+目前狀態（2026-07-28）：Phase 0–6 已完成（包含 HAPPET Case Study 與真實圖片更新）；Phase 7 為需求成立時才導入的條件式階段。目前 roadmap 規劃至 Phase 7，未規劃 Phase 8。
 
 ### Phase 0：內容與技術基線
 

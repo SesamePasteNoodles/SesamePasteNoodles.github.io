@@ -79,6 +79,26 @@ assert(
   'Old unapproved asset `dist/projects/ai-agent/main-menu.jpg` still exists in dist output.',
 )
 
+const happetImageFiles = [
+  '01-my-wallet.png',
+  '02-payment-admin.png',
+  '03-member-center.png',
+  '04-member-admin.png',
+  '05-matching-orders.png',
+  '06-expert-records.png',
+  '07-pet-profile.png',
+  '08-community-home.png',
+  '09-marketplace-home.png',
+]
+
+for (const imageFile of happetImageFiles) {
+  const imageInDist = path.join(projectsDir, 'happet', imageFile)
+  assert(
+    fs.existsSync(imageInDist) && fs.statSync(imageInDist).size > 0,
+    `\`dist/projects/happet/${imageFile}\` does not exist or is empty (0 bytes).`,
+  )
+}
+
 // 7. Check JS & CSS bundles in dist/assets
 const assetsDir = path.join(distDir, 'assets')
 assert(fs.existsSync(assetsDir), '`dist/assets` directory does not exist.')
@@ -120,6 +140,11 @@ for (const slug of requiredSlugs) {
 assert(
   combinedJsContent.includes('/projects') || combinedJsContent.includes('projects'),
   'Projects route definition missing from production bundle.',
+)
+
+assert(
+  combinedJsContent.includes('https://github.com/SesamePasteNoodles/HAPPET'),
+  'HAPPET repository URL missing from production JS bundle.',
 )
 
 // 10. Source contract checks for Projects row layout criteria

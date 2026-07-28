@@ -29,6 +29,11 @@ defineProps<{
         <span class="meta-value">{{ project.period }}</span>
       </div>
 
+      <div v-if="project.publicDate" class="meta-item">
+        <span class="meta-label">RELEASE DATE</span>
+        <span class="meta-value">{{ project.publicDate }}</span>
+      </div>
+
       <div v-if="project.status" class="meta-item">
         <span class="meta-label">PROJECT STATUS</span>
         <span class="meta-value">{{ project.status }}</span>
