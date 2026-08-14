@@ -18,9 +18,16 @@ import { skillGroups } from "@/data/skills";
           <span class="hero-title-accent">CHEN<span class="hero-dot">.</span></span>
         </h1>
 
-        <p class="hero-lead">
-          我是持續累積實務經驗的全端工程師。<br />歡迎瀏覽我實際做過的專案、解決過的問題，以及還在持續學習的內容。
-        </p>
+        <div class="hero-lead">
+          <p>
+            以 C# / ASP.NET Core
+            為核心，具備 API、資料庫、身分驗證及交易流程實作經驗。除了功能實作，也重視需求如何轉化為系統設計，以及資料、資安與服務間的協作。
+          </p>
+          <p>
+            現階段希望透過軟體開發累積工程實務經驗，並持續拓展網路、部署與 Cloud
+            等系統知識，長期希望具備從需求理解、系統設計到技術交付的完整 Solution 能力。
+          </p>
+        </div>
 
         <div class="hero-actions">
           <BaseButton to="/#projects" variant="primary">

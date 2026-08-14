@@ -435,12 +435,18 @@ main,
 }
 
 .hero-lead {
+  display: grid;
   max-width: 640px;
-  margin-top: clamp(1.5rem, 3vw, 2.2rem);
+  gap: clamp(1.25rem, 2vw, 1.75rem);
+  margin-top: clamp(2.25rem, 4vw, 3.25rem);
   margin-bottom: 0;
   color: var(--color-text-secondary);
   font-size: clamp(1.05rem, 2vw, 1.25rem);
   line-height: 1.7;
+}
+
+.hero-lead p {
+  margin: 0;
 }
 
 .hero-actions {
